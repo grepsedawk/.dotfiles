@@ -30,7 +30,7 @@ font pango: monospace 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ssh-agent i3-sensible-terminal
+bindsym $mod+Return exec urxvtcd -e tmux
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -157,7 +157,7 @@ bar {
 
 # lock
 bindsym $mod+control+l exec "sh ~/.i3/fuzzy_lock.sh"
-exec xautolock -time 1 -locker 'sh ~/.i3/fuzzy_lock.sh' &
+exec xautolock -time 5 -locker 'sh ~/.i3/fuzzy_lock.sh' &
 
 # make this much prettier
 exec --no-startup-id gnome-settings-daemon
@@ -180,3 +180,9 @@ exec --no-startup-id "sh ~/.i3/wallpaper.sh"
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
+
+# mouse speed
+exec xset m 2.9 0
+
+# remap any keys needed
+exec_always xmodmap ~/.xmodmap
