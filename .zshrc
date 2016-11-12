@@ -82,23 +82,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-function stopwatch() (
-    trap 'ctrl_c $1' INT
-    function ctrl_c() {
-            echo -n "#BS-$1 work Development $(date -u --date @$((`date +%s` - $date1)) +%-Hh%-Mm)" | xclip -sel clip
-            echo "\n\n#BS-$1 work Development $(date -u --date @$((`date +%s` - $date1)) +%-Hh%-Mm) was sent to your clipboard."
-            exit
-    }
-    date1=`date +%s`;
-    echo "Currently working on '#BS-$1':"
-    while true; do
-    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
-    sleep 0.1
-    done
-)
-alias yt=stopwatch
-
-source /etc/profile.d/rvm.sh
-
-# added by travis gem
-[ -f /home/alex/.travis/travis.sh ] && source /home/alex/.travis/travis.sh

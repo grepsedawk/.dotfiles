@@ -30,7 +30,7 @@ font pango: monospace 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtcd -e tmux
+bindsym $mod+Return exec urxvt -e tmux
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -160,14 +160,13 @@ bindsym $mod+control+l exec "sh ~/.i3/fuzzy_lock.sh"
 exec xautolock -time 5 -locker 'sh ~/.i3/fuzzy_lock.sh' &
 
 # make this much prettier
-exec --no-startup-id gnome-settings-daemon
+#exec --no-startup-id gnome-settings-daemon
 
 # don't follow mouse damnit
 focus_follows_mouse no
 
 # NetworkManager
-exec --no-startup-id nm-applet
-exec --no-startup-id synology-cloud-station
+#exec --no-startup-id nm-applet
 
 # move workspace between monitors
 bindsym $mod+Tab exec i3-msg move workspace to output right
@@ -185,4 +184,4 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 exec xset m 2.9 0
 
 # remap any keys needed
-exec_always xmodmap ~/.xmodmap
+#exec_always xmodmap ~/.xmodmap
