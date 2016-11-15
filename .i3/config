@@ -166,7 +166,7 @@ exec xautolock -time 5 -locker 'sh ~/.i3/fuzzy_lock.sh' &
 focus_follows_mouse no
 
 # NetworkManager
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 # move workspace between monitors
 bindsym $mod+Tab exec i3-msg move workspace to output right
