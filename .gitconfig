@@ -1,6 +1,6 @@
 [user]
 	name = Alex Piechowski
-	email = alex@powercode.com
+	email = alex@piechowski.org
 [core]
 	editor = vim
 	excludesfile = /home/alex/.gitignore_global

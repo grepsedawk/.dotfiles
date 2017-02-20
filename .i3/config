@@ -168,6 +168,9 @@ focus_follows_mouse no
 # NetworkManager
 exec --no-startup-id nm-applet
 
+# jetbrains toolbox app
+exec jetbrains-toolbox --minimize
+
 # move workspace between monitors
 bindsym $mod+Tab exec i3-msg move workspace to output right
 bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
