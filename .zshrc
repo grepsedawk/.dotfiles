@@ -89,3 +89,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # added by travis gem
 [ -f /home/alex/.travis/travis.sh ] && source /home/alex/.travis/travis.sh
+
+eval $(thefuck --alias asdf)
+
