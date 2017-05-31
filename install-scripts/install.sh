@@ -8,12 +8,12 @@ if [ ! -d ~/.dotfiles ]; then
   git clone https://github.com/pachonk/.dotfiles ~/.dotfiles
 fi
 
-$HOME/.dotfiles/google-chrome/install.sh
-$HOME/.dotfiles/zsh/install.sh
-$HOME/.dotfiles/redis/install-redis.sh
-$HOME/.dotfiles/thefuck/install.sh
-$HOME/.dotfiles/asdf/install.sh
-$HOME/.dotfiles/bc3/install.sh
+$HOME/.dotfiles/install-scripts/google-chrome/install.sh
+$HOME/.dotfiles/install-scripts/zsh/install.sh
+$HOME/.dotfiles/install-scripts/redis/install-redis.sh
+$HOME/.dotfiles/install-scripts/thefuck/install.sh
+$HOME/.dotfiles/install-scripts/asdf/install.sh
+$HOME/.dotfiles/install-scripts/bc3/install.sh
 
 # TODO install .dotfiles automatically
 
