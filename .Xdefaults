@@ -37,12 +37,6 @@ urxvt.saveLines: 1000000
 URxvt*scrollTtyKeypress:  true
 URxvt*scrollTtyOutput:  false
 
-# control arrows to skip words
-# urxvt.keysym.Control-Up:    \033[1;5A
-# urxvt.keysym.Control-Down:  \033[1;5B
-# urxvt.keysym.Control-Left:  \033[1;5D
-# urxvt.keysym.Control-Right: \033[1;5C
-
 URxvt.iso14755: False
 
 # control + shift + v paste
