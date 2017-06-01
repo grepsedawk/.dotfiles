@@ -1,2 +1,3 @@
+sudo: true
 install: ./install-scripts/install.sh
 
