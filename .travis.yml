@@ -1,4 +1,5 @@
 sudo: true
+dist: trusty
 before_install: sudo sed -i 's/required/sufficient/' /etc/pam.d/chsh
 script: ./install-scripts/install.sh
 
