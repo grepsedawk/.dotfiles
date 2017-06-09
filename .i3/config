@@ -176,7 +176,7 @@ bindsym $mod+Tab exec i3-msg move workspace to output right
 bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
 
 # battery notification/auto hibernate
-exec --no-startup-id "sh ~/.i3/battery_monitor.sh"
+exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
 
 # wallpaper
 exec --no-startup-id "sh ~/.i3/wallpaper.sh"
