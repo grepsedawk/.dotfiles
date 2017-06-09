@@ -9,8 +9,11 @@ class Dotfile
 
   def self.link_path!(path)
     Dir.glob(File.join(path, '.*'))
-       .map{ |filename| Dotfile.new(File.basename(filename)) }
-       .each { |dotfile| dotfile.link! }
+       .each { |dotfile| link!(dotfile) }
+  end
+
+  def self.link!(filename)
+    Dotfile.new(File.basename(filename)).link!
   end
 
   def ignored?
