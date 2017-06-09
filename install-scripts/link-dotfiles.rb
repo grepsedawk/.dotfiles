@@ -13,7 +13,7 @@ class Dotfile
   end
 
   def self.link!(filename)
-    Dotfile.new(File.basename(filename)).link!
+    new(File.basename(filename)).link!
   end
 
   def ignored?
