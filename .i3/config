@@ -181,6 +181,9 @@ exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
 # wallpaper
 exec --no-startup-id "sh ~/.i3/wallpaper.sh"
 
+# flux
+exec --no-startup-id "redshift"
+
 # audio keybindings
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
