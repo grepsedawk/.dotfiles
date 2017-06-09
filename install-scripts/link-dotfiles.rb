@@ -25,7 +25,7 @@ class Dotfile
       return false
     end
 
-    if File.exists? link_path
+    if File.exist? link_path
       puts "File or symlink located at #{link_path} already exists. Please delete it and re-run to re-link."
       return false
     end
