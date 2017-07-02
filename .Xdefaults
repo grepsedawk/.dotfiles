@@ -4,32 +4,11 @@ URxvt.boldFont: xft:bitstream vera sans mono:bold:size=8:antialias=true
 
 URxvt.letterSpace: -1
 
-# Theme
-urxvt*foreground: white
-urxvt*background: black
 
-*color0:  #2E3436
-*color1:  #a40000
-*color2:  #4E9A06
-*color3:  #C4A000
-*color4:  #3465A4
-*color5:  #75507B
-*color6:  #ce5c00
-*color7:  #babdb9
-*color8:  #555753
-*color9:  #EF2929
-*color10: #8AE234
-*color11: #FCE94F
-*color12: #729FCF
-*color13: #AD7FA8
-*color14: #fcaf3e
-*color15: #EEEEEC
-
-urxvt.transparent: true
+# urxvt.transparent: true
 urxvt.shading: 15
 urxvt.scrollBar: false
 urxvt.cursorBlink: true
-
 
 # Misc
 URxvt*loginShell: true
@@ -46,3 +25,42 @@ URxvt.perl-ext-common: default,clipboard
 
 # double click selection delims
 URxvt*cutchars: BACKSLASH '"'&()*,;<=>?@[]^{|}
+
+# Theme
+! special
+*.foreground:   #b7b8b9
+*.background:   #0c0d0e
+*.cursorColor:  #b7b8b9
+
+! black
+*.color0:       #0c0d0e
+*.color8:       #737475
+
+! red
+*.color1:       #e31a1c
+*.color9:       #e31a1c
+
+! green
+*.color2:       #31a354
+*.color10:      #31a354
+
+! yellow
+*.color3:       #dca060
+*.color11:      #dca060
+
+! blue
+*.color4:       #3182bd
+*.color12:      #3182bd
+
+! magenta
+*.color5:       #756bb1
+*.color13:      #756bb1
+
+! cyan
+*.color6:       #80b1d3
+*.color14:      #80b1d3
+
+! white
+*.color7:       #b7b8b9
+*.color15:      #fcfdfe
+
