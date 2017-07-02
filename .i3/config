@@ -159,12 +159,6 @@ bar {
 bindsym $mod+control+l exec "sh ~/.i3/fuzzy_lock.sh"
 exec xautolock -time 5 -locker 'sh ~/.i3/fuzzy_lock.sh' &
 
-# make this much prettier
-#exec --no-startup-id gnome-settings-daemon
-
-# don't follow mouse damnit
-focus_follows_mouse no
-
 # NetworkManager
 exec --no-startup-id nm-applet
 
