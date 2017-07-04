@@ -53,6 +53,11 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rails bundler tmux tmuxinator)
 
+# autostart tmux
+export ZSH_TMUX_AUTOSTART=true
+
+alias mux=tmuxinator
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
