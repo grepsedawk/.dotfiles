@@ -2,7 +2,8 @@
 
 sudo apt update
 sudo apt install -y vim i3 git tmux shutter rxvt-unicode feh \
-	silversearcher-ag build-essential tcl libqt4-dev libqtwebkit-dev
+	silversearcher-ag build-essential tcl libqt4-dev libqtwebkit-dev \
+        scrot redshift
 
 if [ ! -d ~/.dotfiles ]; then
   git clone git@github.com:pachonk/.dotfiles.git ~/.dotfiles || git clone https://github.com/pachonk/.dotfiles ~/.dotfiles
