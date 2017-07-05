@@ -19,6 +19,4 @@ $HOME/.dotfiles/install-scripts/jetbrains-toolbox/install.sh
 $HOME/.dotfiles/install-scripts/postgresql/install.sh
 $HOME/.dotfiles/install-scripts/maria-db/install.sh
 
-# preload asdf so ruby is available
-. $HOME/.asdf/asdf.sh
 $HOME/.dotfiles/install-scripts/link-dotfiles.rb
