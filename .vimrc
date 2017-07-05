@@ -1,9 +1,3 @@
-" control arrow hungry jump
-execute "set <xUp>=\e[1;*A"
-execute "set <xDown>=\e[1;*B"
-execute "set <xRight>=\e[1;*C"
-execute "set <xLeft>=\e[1;*D"
-
 " tabs to 2 spaces
 set expandtab
 set shiftwidth=2
@@ -24,3 +18,8 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
+" stop using arrow keys, dammit
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
