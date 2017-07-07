@@ -32,6 +32,9 @@ inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
 
+" fzf file fuzzy search
+nnoremap <C-p> :FZF<CR>
+
 " Plugins!
 call plug#begin('~/.local/share/nvim/plugged')
 
