@@ -1,0 +1,6 @@
+bundler
+pry
+rubocop
+reek
+brakeman
+tmuxinator
