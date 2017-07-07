@@ -1,3 +1,6 @@
+" turn off mouse mode
+set mouse=c
+
 " tabs to 2 spaces
 set expandtab
 set shiftwidth=2
@@ -28,3 +31,13 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
+
+" Plugins!
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'w0rp/ale'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
