@@ -11,11 +11,8 @@ filetype plugin indent on
 set relativenumber 
 set number
 
-" control + vim keys to move between splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" source vimrc
+nmap <leader>so :source $MYVIMRC<cr>
 
 " open panes same location as tmux
 set splitbelow
@@ -33,7 +30,7 @@ inoremap <Left> <nop>
 inoremap <Right> <nop>
 
 " fzf file fuzzy search
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :FZF<cr>
 
 " Plugins!
 call plug#begin('~/.local/share/nvim/plugged')
@@ -43,5 +40,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'onemanstartup/vim-slim'
+Plug 'tpope/vim-rails'
 
 call plug#end()
