@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt install -y i3 git tmux shutter rxvt-unicode feh \
 	silversearcher-ag build-essential tcl libqt4-dev libqtwebkit-dev \
-        scrot redshift xautolock xclip libssl-dev zlib1g-dev xclip synclient \
+        scrot redshift xautolock xclip libssl-dev zlib1g-dev xclip \
         acpi scrot nmap
 
 if [ ! -d ~/.dotfiles ]; then
