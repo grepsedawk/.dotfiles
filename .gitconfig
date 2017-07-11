@@ -1,6 +1,6 @@
 [user]
 	name = Alex Piechowski
-	email = alex@piechowski.org
+	email = alex@piechowski.io
 [core]
 	editor = vim
 	excludesfile = /home/alex/.gitignore_global
