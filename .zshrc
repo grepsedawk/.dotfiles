@@ -85,3 +85,5 @@ source $ZSH/oh-my-zsh.sh
 
 eval $(thefuck --alias qwer)
 
+# for vim control+s
+stty -ixon
