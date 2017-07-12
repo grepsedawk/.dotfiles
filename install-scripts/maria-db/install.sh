@@ -4,7 +4,7 @@ sudo apt install -y mariadb-server libmariadb-dev
 if ! grep -q "export MYSQL_PASSWORD" $HOME/.env; then
   MYSQL_USERNAME=`whoami`
   MYSQL_PASSWORD=`openssl rand -base64 32`
-  echo "export MYSQL_USERNAME='${MYSQL_USERNAME}'" >> $HOME/.env
+  echo "export MYSQL_USER='${MYSQL_USERNAME}'" >> $HOME/.env
   echo "export MYSQL_PASSWORD='${MYSQL_PASSWORD}'" >> $HOME/.env
   cat << EOF > $HOME/.my.cnf
 [mysql]
