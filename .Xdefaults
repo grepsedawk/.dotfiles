@@ -27,40 +27,29 @@ URxvt.perl-ext-common: default,clipboard
 URxvt*cutchars: BACKSLASH '"'&()*,;<=>?@[]^{|}
 
 # Theme
-! special
-*.foreground:   #b7b8b9
-*.background:   #0c0d0e
-*.cursorColor:  #b7b8b9
-
+*background: black
+*foreground: white
 ! black
-*.color0:       #0c0d0e
-*.color8:       #737475
-
+*color0:  #000000
+*color8:  #000000
 ! red
-*.color1:       #e31a1c
-*.color9:       #e31a1c
-
+*color1:  #ff0000
+*color9:  #ff0000
 ! green
-*.color2:       #31a354
-*.color10:      #31a354
-
+*color2:  #00ff00
+*color10: #00ff00
 ! yellow
-*.color3:       #dca060
-*.color11:      #dca060
-
+*color3:  #ffff00
+*color11: #ffff00
 ! blue
-*.color4:       #3182bd
-*.color12:      #3182bd
-
+*color4:  #008fff
+*color12: #008fff
 ! magenta
-*.color5:       #756bb1
-*.color13:      #756bb1
-
+*color5:  #ff00ff
+*color13: #ff00ff
 ! cyan
-*.color6:       #80b1d3
-*.color14:      #80b1d3
-
+*color6:  #00ffff
+*color14: #00ffff
 ! white
-*.color7:       #b7b8b9
-*.color15:      #fcfdfe
-
+*color7:  #aaaaaa
+*color15: #ffffff
