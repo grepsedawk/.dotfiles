@@ -163,7 +163,7 @@ exec xautolock -time 5 -locker 'sh ~/.i3/fuzzy_lock.sh' &
 exec --no-startup-id nm-applet
 
 # jetbrains toolbox app
-exec jetbrains-toolbox --minimize
+# exec jetbrains-toolbox --minimize
 
 # move workspace between monitors
 bindsym $mod+Tab exec i3-msg move workspace to output right
