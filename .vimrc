@@ -11,6 +11,12 @@ filetype plugin indent on
 set relativenumber 
 set number
 
+" search options
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
 " source vimrc
 nmap <leader>so :source $MYVIMRC<CR>
 
