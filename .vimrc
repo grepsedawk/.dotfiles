@@ -23,6 +23,13 @@ nmap <leader>so :source $MYVIMRC<CR>
 " fzf file fuzzy search
 nnoremap <C-p> :FZF<CR>
 
+" ag searching
+let g:ackprg = 'ag --vimgrep --smart-case'                                                   
+cnoreabbrev ag Ack                                                                           
+cnoreabbrev aG Ack                                                                           
+cnoreabbrev Ag Ack                                                                           
+cnoreabbrev AG Ack  
+
 " jk or kj for escape in insert mode
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
@@ -49,6 +56,7 @@ Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'onemanstartup/vim-slim'
