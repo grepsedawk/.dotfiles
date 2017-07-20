@@ -87,3 +87,7 @@ eval $(thefuck --alias qwer)
 
 # for vim control+s
 stty -ixon
+
+# asdf version management
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

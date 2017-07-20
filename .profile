@@ -26,11 +26,6 @@ if [ -f "$HOME/.env" ]; then
     . "$HOME/.env"
 fi
 
-
-# asdf version management
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
 # place chrome cache under /tmp which is a tmpfs
 mkdir -p /tmp/$USER/google-chrome-cache
 rm -rf ~/.cache/google-chrome
