@@ -32,6 +32,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec urxvt
 
+# start a browser
+bindsym $mod+b exec sensible-browser
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -188,7 +191,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 # mouse speed
-exec xset m 2.9 0
+# exec xset m 2.9 0
 
 # remap any keys needed
 exec_always xmodmap ~/.xmodmap
