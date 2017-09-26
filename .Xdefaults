@@ -1,6 +1,6 @@
 # Fonts
-URxvt.font:     xft:Source Code Pro:size=10:antialias=true
-URxvt.boldFont: xft:Source Code Pro:bold:size=10:antialias=true
+URxvt.font:     xft:Source Code Pro:size=12:antialias=true
+URxvt.boldFont: xft:Source Code Pro:bold:size=12:antialias=true
 
 URxvt.letterSpace: -1
 
@@ -12,9 +12,6 @@ urxvt.cursorBlink: true
 
 # Misc
 URxvt*loginShell: true
-urxvt.saveLines: 1000000
-URxvt*scrollTtyKeypress:  true
-URxvt*scrollTtyOutput:  false
 
 URxvt.iso14755: False
 
@@ -24,7 +21,7 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.perl-ext-common: default,clipboard
 
 # double click selection delims
-URxvt*cutchars: BACKSLASH '"'&()*,;<=>?@[]^{|}
+URxvt*cutchars: ()*,<>[]{}|`""'' 
 
 # Theme
 ! special
