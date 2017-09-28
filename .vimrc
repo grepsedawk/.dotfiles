@@ -38,7 +38,7 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " use control s to save and exit insert mode
 map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>:!ctags -R -f .tags .<CR><CR>
+imap <C-s> <esc>:w<CR>:!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags .<CR><CR>
 
 " open panes same location as tmux
 set splitbelow
@@ -84,4 +84,4 @@ nmap <leader>so :source $MYVIMRC<CR>
 nmap <Esc><Esc> :noh<CR>:set nopaste<CR>
 nmap <leader>r :!resize<CR><CR>
 nmap <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
-nmap <leader>c :!ctags -R -f .tags .<CR>
+nmap <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags . $(bundle list --paths)<CR>
