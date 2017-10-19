@@ -40,6 +40,10 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>:!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags .<CR><CR>
 
+" additional escapes
+imap jk <esc>
+imap kj <esc>
+
 " open panes same location as tmux
 set splitbelow
 set splitright
