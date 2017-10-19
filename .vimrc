@@ -76,6 +76,9 @@ Plug 'blueshirts/darcula'
 Plug 'tmhedberg/matchit'
 Plug 'joker1007/vim-ruby-heredoc-syntax'
 
+" Wakatime, a time spent coding tracker
+Plug 'wakatime/vim-wakatime'
+
 call plug#end()
 
 " Theme
