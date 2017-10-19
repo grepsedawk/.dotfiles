@@ -87,8 +87,20 @@ colorscheme hybrid
 " custom leader commands
 let mapleader = ","
 " source vimrc
-nmap <leader>so :source $MYVIMRC<CR>
-nmap <Esc><Esc> :noh<CR>:set nopaste<CR>
-nmap <leader>r :!resize<CR><CR>
-nmap <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
-nmap <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags . $(bundle list --paths)<CR>
+map <leader>so :source $MYVIMRC<CR>
+map <Esc><Esc> :noh<CR>:set nopaste<CR>
+map <leader>r :!resize<CR><CR>
+map <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
+map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags . $(bundle list --paths)<CR>
+map <leader>co mmgg"+yG`m
+
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <Leader>n :call RenameFile()<cr>
