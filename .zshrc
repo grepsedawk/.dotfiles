@@ -53,6 +53,9 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rails bundler tmux tmuxinator)
 
+# additional git aliases
+alias gfc='git fetch upstream && git checkout upstream/master'
+alias gfr='git fetch upstream && git rebase -i upstream/master'
 # autostart tmux
 export ZSH_TMUX_AUTOSTART=true
 
