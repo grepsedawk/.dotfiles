@@ -1,7 +1,7 @@
 #! perl
 sub on_sel_grab {
     my $query = $_[0]->selection;
-    open (my $pipe,'| /usr/bin/xclip -in -selection clipboard') or die;
+    open (my $pipe, '| sed -e \'s/[ \t]*$//\' | /usr/bin/xclip -in -selection clipboard') or die;
     print $pipe $query;
     close $pipe;
 }
