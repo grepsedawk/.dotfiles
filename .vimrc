@@ -7,6 +7,9 @@ set shiftwidth=2
 set softtabstop=2
 filetype plugin indent on
 
+" live reload files if it changes on disk
+set autoread
+
 " word wrap more excellently
 nmap k gk
 nmap j gj
@@ -70,12 +73,13 @@ Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0ng/vim-hybrid'
 Plug 'blueshirts/darcula'
+Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
-Plug 'joker1007/vim-ruby-heredoc-syntax'
 
 " Wakatime, a time spent coding tracker
 Plug 'wakatime/vim-wakatime'
@@ -94,6 +98,8 @@ map <leader>r :!resize<CR><CR>
 map <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
 map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags . $(bundle list --paths)<CR>
 map <leader>co mmgg"+yG`m
+map <leader>' cs"'
+map <leader>" cs'"
 
 function! RenameFile()
   let old_name = expand('%')
