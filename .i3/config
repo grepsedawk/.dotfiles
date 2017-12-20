@@ -200,5 +200,4 @@ exec_always xmodmap ~/.xmodmap
 exec --no-startup-id shutter --min_at_startup
 
 # set up monitors
-exec --no-startup-id xrandr --output HDMI-0 --primary --left-of DP-0 --output DP-4 --auto --left-of HDMI-0 --output DP-2 --auto --left-of DP-4
 bindsym $mod+m exec "xrandr --output HDMI-0 --primary --left-of DP-0 --output DP-4 --auto --left-of HDMI-0 --output DP-2 --auto --left-of DP-4"
