@@ -185,6 +185,8 @@ exec --no-startup-id "redshift"
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym $mod+bracketleft exec "~/.i3/audio_switcher yeti"
+bindsym $mod+brackeright exec "~/.i3/audio_switcher speaker"
 
 # screen brightness keybindings
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10

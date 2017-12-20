@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+output_device="$1"
+
+case $output_device in
+  yeti)
+    echo "Setting output device to yeti audio headphone jack"
+    sink="alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo"
+    ;;
+  speakers)
+    echo "Setting output device to laptop speakers"
+    sink="alsa_output.pci-0000_00_1f.3.analog-stereo"
+    ;;
+  *)
+    echo "Unknown device mapping, exiting without changing device"
+    exit
+esac
+
+pacmd set-default-sink $sink
+pulseaudio -k
+pulseaudio -D
