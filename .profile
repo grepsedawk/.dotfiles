@@ -35,3 +35,8 @@ mkdir -p /tmp/$USER/google-chrome-cache
 rm -rf ~/.cache/google-chrome
 ln -s /tmp/$USER/google-chrome-cache ~/.cache/google-chrome
 
+# use ag to get the file list for fzf
+# this will be a little faster (by over 10x) and it will stop things
+# that I don't care about from getting into my fzf results
+FZF_CTRL_T_COMMAND="ag -g ''"
+FZF_DEFAULT_COMMAND="ag -g ''"
