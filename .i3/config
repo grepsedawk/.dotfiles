@@ -186,7 +186,7 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym $mod+bracketleft exec "~/.i3/audio_switcher yeti"
-bindsym $mod+brackeright exec "~/.i3/audio_switcher speaker"
+bindsym $mod+bracketright exec "~/.i3/audio_switcher speakers"
 
 # screen brightness keybindings
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
