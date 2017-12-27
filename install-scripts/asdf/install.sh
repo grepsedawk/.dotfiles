@@ -8,8 +8,6 @@ fi
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
-asdf install ruby 2.4.1
-asdf install ruby 2.3.4
 asdf install ruby 2.4.3
 asdf install ruby 2.5.0
 
