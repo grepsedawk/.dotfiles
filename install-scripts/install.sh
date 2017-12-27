@@ -1,10 +1,12 @@
 #! /usr/bin/env bash
 
 sudo apt update
-sudo apt install -y i3 git tmux shutter rxvt-unicode rxvt-unicode-256color feh \
+sudo apt install -y i3 git tmux shutter rxvt-unicode feh \
 	silversearcher-ag build-essential tcl libqt4-dev libqtwebkit-dev \
         scrot redshift xautolock xclip libssl-dev zlib1g-dev xclip \
         acpi scrot nmap libreadline6 libreadline6-dev
+
+sudo apt install -y rxvt-unicode-256color
 
 if [ ! -d ~/.dotfiles ]; then
   git clone git@github.com:pachonk/.dotfiles.git ~/.dotfiles || git clone https://github.com/pachonk/.dotfiles ~/.dotfiles
