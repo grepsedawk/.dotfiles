@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 sudo apt update
 sudo apt install -y i3 git tmux shutter rxvt-unicode feh \
