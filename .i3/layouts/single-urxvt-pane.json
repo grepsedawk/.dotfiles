@@ -1,0 +1,21 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 556,
+       "width": 884,
+       "x": 0,
+       "y": 0
+    },
+    "name": "urxvt",
+    "percent": 1,
+    "swallows": [
+       {
+       "class": "^URxvt$"
+       }
+    ],
+    "type": "con"
+}
+
