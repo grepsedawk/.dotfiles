@@ -87,7 +87,7 @@ Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " Theme
-colorscheme hybrid
+colorscheme darcula
 
 " custom leader commands
 let mapleader = ","
