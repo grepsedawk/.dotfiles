@@ -202,7 +202,7 @@ exec_always xmodmap ~/.xmodmap
 exec --no-startup-id shutter --min_at_startup
 
 # set up monitors
-bindsym $mod+m exec "xrandr --output HDMI-0 --primary --left-of DP-0 --output DP-4 --auto --left-of HDMI-0 --output DP-2 --auto --left-of DP-4"
+bindsym $mod+m exec ~/.i3/setup_monitor_position
 # and workspaces, too
 workspace 1 output DP-2
 workspace 2 output DP-4

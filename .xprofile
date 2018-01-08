@@ -1,1 +1,1 @@
-xrandr --output HDMI-0 --primary --left-of DP-0 --output DP-4 --auto --left-of HDMI-0 --output DP-2 --auto --left-of DP-4
+~/.i3/setup_monitor_position

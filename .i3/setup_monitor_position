@@ -1,0 +1,11 @@
+#!/bin/bash
+
+LAPTOP=DP-0
+TOP=HDMI-0
+LEFT_INNER=DP-4
+LEFT_OUTER=DP-2
+
+xrandr --output "${TOP}" --primary --auto \
+       --output "${LEFT_INNER}" --right-of "${LEFT_OUTER}" \
+       --output "${TOP}" --right-of "${LEFT_INNER}" \
+       --output "${LAPTOP}" --right-of "${TOP}"
