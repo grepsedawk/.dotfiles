@@ -7,6 +7,11 @@ set shiftwidth=2
 set softtabstop=2
 filetype plugin indent on
 
+" language specific, too
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+
 " live reload files if it changes on disk
 set autoread
 
@@ -41,7 +46,7 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " use control s to save and exit insert mode
 map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>:!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags .<CR><CR>
+imap <C-s> <esc>:w<CR>
 
 " additional escapes
 imap jk <esc>
@@ -75,11 +80,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0ng/vim-hybrid'
 Plug 'blueshirts/darcula'
 Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-commentary'
+
+" ejs support
+Plug 'nikvdp/ejs-syntax'
 
 " Wakatime, a time spent coding tracker
 Plug 'wakatime/vim-wakatime'
@@ -88,6 +98,9 @@ call plug#end()
 
 " Theme
 colorscheme darcula
+
+" Test Running
+let g:rspec_command = "!clear && bundle exec bin/rspec {spec}"
 
 " custom leader commands
 let mapleader = ","
@@ -100,6 +113,7 @@ map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-rel
 map <leader>co mmgg"+yG`m
 map <leader>' cs"'
 map <leader>" cs'"
+map <Leader>o :w<cr>:call RunNearestSpec()<CR>
 
 function! RenameFile()
   let old_name = expand('%')
