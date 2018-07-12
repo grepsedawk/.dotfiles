@@ -198,8 +198,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 # remap any keys needed
 exec_always xmodmap ~/.xmodmap
 
-# start shutter on boot
+# system tray startups
 exec --no-startup-id shutter --min_at_startup
+exec discord --start-minimized
 
 # set up monitors
 bindsym $mod+m exec ~/.i3/setup_monitor_position
