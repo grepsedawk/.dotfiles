@@ -13,7 +13,7 @@ function launchNagBar
   ps -p $NAGBAR_PID 2> /dev/null | grep "i3-nagbar" &> /dev/null
 
   if [ $? -ne 0 ]; then
-    i3-nagbar -m 'Battery low!' -b 'Hibernate!' 'pm-hibernate' &> /dev/null &
+    i3-nagbar -m 'Battery low!' -b 'Suspend!' 'systemctl suspend' &> /dev/null &
   fi
   NAGBAR_PID=$!
 }
@@ -44,7 +44,7 @@ while [ true ]; do
             fi
             if [[ $rem_bat -le $CRITICAL_PERCENT ]]; then
                 SLEEP_TIME=1
-                pm-hibernate
+                systemctl suspend
             fi
         fi
     else
