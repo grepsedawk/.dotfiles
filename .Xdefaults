@@ -1,6 +1,6 @@
 # Fonts
-URxvt.font:     xft:Inconsolata:size=12:antialias=true
-URxvt.boldFont: xft:Inconsolata:bold:size=12:antialias=true
+URxvt.font:     xft:Inconsolata:size=10:antialias=true
+URxvt.boldFont: xft:Inconsolata:bold:size=10:antialias=true
 
 URxvt.letterSpace: -1
 
@@ -23,40 +23,40 @@ URxvt.perl-ext-common: default,clipboard
 # double click selection delims
 URxvt*cutchars: ()*,<>[]{}|`""'' 
 
-# Theme
+! Theme
 ! special
-*.foreground:   #b7b8b9
-*.background:   #0c0d0e
-*.cursorColor:  #b7b8b9
+*.foreground:   #93a1a1
+*.background:   #002b36
+*.cursorColor:  #93a1a1
 
 ! black
-*.color0:       #0c0d0e
-*.color8:       #737475
+*.color0:       #002b36
+*.color8:       #657b83
 
 ! red
-*.color1:       #e31a1c
-*.color9:       #e31a1c
+*.color1:       #dc322f
+*.color9:       #dc322f
 
 ! green
-*.color2:       #31a354
-*.color10:      #31a354
+*.color2:       #859900
+*.color10:      #859900
 
 ! yellow
-*.color3:       #dca060
-*.color11:      #dca060
+*.color3:       #b58900
+*.color11:      #b58900
 
 ! blue
-*.color4:       #3182bd
-*.color12:      #3182bd
+*.color4:       #268bd2
+*.color12:      #268bd2
 
 ! magenta
-*.color5:       #756bb1
-*.color13:      #756bb1
+*.color5:       #6c71c4
+*.color13:      #6c71c4
 
 ! cyan
-*.color6:       #80b1d3
-*.color14:      #80b1d3
+*.color6:       #2aa198
+*.color14:      #2aa198
 
 ! white
-*.color7:       #b7b8b9
-*.color15:      #fcfdfe
+*.color7:       #93a1a1
+*.color15:      #fdf6e3
