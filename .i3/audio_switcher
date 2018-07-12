@@ -16,5 +16,3 @@ case $output_device in
 esac
 
 pacmd set-default-sink $sink
-pulseaudio -k
-pulseaudio -D
