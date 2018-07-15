@@ -10,6 +10,7 @@ if ! grep -q "export MYSQL_PASSWORD" $HOME/.env; then
 [mysql]
 password=${MYSQL_PASSWORD}
 EOF
+  sudo service mysql start
   sudo mysql -e "CREATE USER '${MYSQL_USERNAME}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}'"
   sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USERNAME}'@'localhost';"
 fi

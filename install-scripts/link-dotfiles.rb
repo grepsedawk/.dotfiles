@@ -1,8 +1,9 @@
-#! /usr/bin/env ruby
+#!/usr/bin/env ruby
+
 class Dotfile
   attr_reader :filename
-  IGNORED_DOTFILES =  %w( . .. .git .travis.yml).freeze
-  
+  IGNORED_DOTFILES = %w[. .. .git .circleci].freeze
+
   def initialize(filename)
     @filename = filename
   end
@@ -21,12 +22,14 @@ class Dotfile
   end
 
   def link!
-    if ignored?
-      return false
-    end
+    return false if ignored?
 
     if File.exist? link_path
-      puts "File or symlink located at #{link_path} already exists. Please delete it and re-run to re-link."
+      puts <<~MESSAGE
+        File or symlink located at #{link_path} already exists.
+        Please delete it and re-run to re-link.
+      MESSAGE
+
       return false
     end
 
@@ -38,7 +41,7 @@ class Dotfile
   end
 
   def link_path
-     "#{ENV['HOME']}/#{filename}"
+   "#{ENV['HOME']}/#{filename}"
   end
 end
 
