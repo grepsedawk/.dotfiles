@@ -1,4 +1,0 @@
-sudo: true
-dist: trusty
-before_install: sudo sed -i 's/required/sufficient/' /etc/pam.d/chsh
-script: curl -fsSL https://raw.githubusercontent.com/pachonk/.dotfiles/master/install-scripts/install.sh | bash
