@@ -16,8 +16,8 @@ autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 set autoread
 
 " word wrap more excellently
-nmap k gk
-nmap j gj
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " relative line numbers
 set relativenumber 
