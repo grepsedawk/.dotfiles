@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/pachonk/.dotfiles.svg?branch=master)](https://travis-ci.org/pachonk/.dotfiles)
-
 # pachonk/.dotfiles
+
+[![CircleCI](https://circleci.com/gh/pachonk/.dotfiles.svg?style=svg)](https://circleci.com/gh/pachonk/.dotfiles)
 
 This is a configuration/dotfile repository for me to fast track rebuilding my development environment.
 
