@@ -87,6 +87,7 @@ Plug 'blueshirts/darcula'
 Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
+Plug 'mhinz/vim-mix-format'
 
 " ejs support
 Plug 'nikvdp/ejs-syntax'
@@ -101,6 +102,8 @@ colorscheme darcula
 
 " Test Running
 let g:rspec_command = "!clear && bundle exec bin/rspec {spec}"
+
+let g:mix_format_on_save = 1
 
 " custom leader commands
 let mapleader = ","
