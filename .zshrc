@@ -83,9 +83,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# added by travis gem
-[ -f /home/alex/.travis/travis.sh ] && source /home/alex/.travis/travis.sh
-
 eval $(thefuck --alias qwer)
 
 # for vim control+s
