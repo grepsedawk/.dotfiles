@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails bundler tmux tmuxinator)
+plugins=(git rails bundler tmux tmuxinator asdf)
 
 # additional git aliases
 alias gfc='git fetch upstream && git checkout upstream/master'
@@ -90,9 +90,5 @@ eval $(thefuck --alias qwer)
 
 # for vim control+s
 stty -ixon
-
-# asdf version management
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
