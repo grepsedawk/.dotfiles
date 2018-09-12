@@ -83,7 +83,11 @@ Plug 'tpope/vim-rails'
 Plug 'thoughtbot/vim-rspec'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0ng/vim-hybrid'
+
+" Themes
 Plug 'blueshirts/darcula'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
@@ -98,7 +102,8 @@ Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " Theme
-colorscheme darcula
+colorscheme dracula
+highlight Normal ctermbg=None
 
 " Test Running
 let g:rspec_command = "!clear && bundle exec bin/rspec {spec}"

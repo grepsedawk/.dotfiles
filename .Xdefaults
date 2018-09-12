@@ -21,40 +21,22 @@ URxvt.perl-ext-common: default,selection-to-clipboard
 ! double click selection delims
 URxvt*cutchars: ()*,<>[]{}|`""'' 
 
-! Theme
-! special
-*.foreground:   #93a1a1
-*.background:   #002b36
-*.cursorColor:  #93a1a1
-
-! black
-*.color0:       #002b36
-*.color8:       #657b83
-
-! red
-*.color1:       #dc322f
-*.color9:       #dc322f
-
-! green
-*.color2:       #859900
-*.color10:      #859900
-
-! yellow
-*.color3:       #b58900
-*.color11:      #b58900
-
-! blue
-*.color4:       #268bd2
-*.color12:      #268bd2
-
-! magenta
-*.color5:       #6c71c4
-*.color13:      #6c71c4
-
-! cyan
-*.color6:       #2aa198
-*.color14:      #2aa198
-
-! white
-*.color7:       #93a1a1
-*.color15:      #fdf6e3
+! Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
