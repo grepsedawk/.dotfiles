@@ -16,7 +16,8 @@ URxvt.iso14755: False
 
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 
-URxvt.perl-ext-common: default,selection-to-clipboard
+URxvt.perl-ext-common: default,selection-to-clipboard,selection-autotransform
+URxvt.selection-autotransform.0: s/ +$//gm
 
 ! double click selection delims
 URxvt*cutchars: ()*,<>[]{}|`""'' 
