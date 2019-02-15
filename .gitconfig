@@ -15,8 +15,8 @@
 [difftool]
 	prompt = false
 [alias]
-        d = difftool
-        co-pr = !sh -c 'git fetch upstream pull/$1/head:pr/$1 && git checkout pr/$1' -
+  d = difftool
+  co-pr = !sh -c 'git fetch upstream pull/$1/head:pr/$1 && git checkout pr/$1' -
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
