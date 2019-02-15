@@ -23,6 +23,8 @@ plugins=(git rails bundler tmux tmuxinator asdf)
 alias gfc='git fetch upstream && git checkout upstream/master'
 alias gfr='git fetch upstream && git rebase -i upstream/master'
 
+# mux for easier tmuxinator
+alias mux=tmuxinator
 source $ZSH/oh-my-zsh.sh
 
 eval $(thefuck --alias qwer)
