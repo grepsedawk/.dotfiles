@@ -1,6 +1,6 @@
 .idea/
 *.orig
 *.swp
-.tags
+tags
 notes.md
 production.sql

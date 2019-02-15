@@ -40,7 +40,6 @@ cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 
 " ctags file setup
-set tags=./.tags;/
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -117,7 +116,7 @@ map <leader>so :source $MYVIMRC<CR>
 map <Esc><Esc> :noh<CR>:set nopaste<CR>
 map <leader>r :!resize<CR><CR>
 map <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
-map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes -f .tags . $(bundle list --paths)<CR>
+map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes . $(bundle list --paths)<CR>
 map <leader>co mmgg"+yG`m
 map <leader>' cs"'
 map <leader>" cs'"
