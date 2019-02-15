@@ -200,7 +200,7 @@ exec_always xmodmap ~/.xmodmap
 
 # system tray startups
 exec --no-startup-id shutter --min_at_startup
-exec discord --start-minimized
+exec sleep 60 && discord --start-minimized
 
 # set up monitors
 bindsym $mod+m exec ~/.i3/setup_monitor_position
