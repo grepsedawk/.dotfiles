@@ -68,6 +68,10 @@ Plug 'christoomey/vim-tmux-navigator'
 " Fuzzy searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Auto close "" () etc
+Plug 'cohama/lexima.vim'
+
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
