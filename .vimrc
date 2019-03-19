@@ -69,10 +69,11 @@ inoremap <Right> <nop>
 
 " Plugins!
 call plug#begin('~/.vim/plugged')
-
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+
+" Fuzzy searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
