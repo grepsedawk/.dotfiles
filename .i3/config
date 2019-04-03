@@ -212,3 +212,6 @@ workspace 4 output DP-0
 
 # use compton for composition
 exec --no-startup-id compton
+
+# Easy shortcut to take a screenshot
+bindsym $mod+c exec shutter -s -c -d 2
