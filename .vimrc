@@ -1,5 +1,7 @@
 " turn off mouse mode
 set mouse=c
+" turn on spell checking
+set spell
 
 " tabs to 2 spaces
 set expandtab
