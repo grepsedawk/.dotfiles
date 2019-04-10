@@ -121,6 +121,7 @@ let mapleader = ","
 " source vimrc
 map <leader>so :source $MYVIMRC<CR>
 map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>vn :tabe notes.md<CR>
 map <Esc><Esc> :noh<CR>:set nopaste<CR>
 map <leader>r :!resize<CR><CR>
 map <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
