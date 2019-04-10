@@ -92,6 +92,9 @@ Plug 'w0ng/vim-hybrid'
 Plug 'blueshirts/darcula'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+" Colorize hex color strings
+Plug 'chrisbra/Colorizer'
+
 Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
