@@ -103,6 +103,9 @@ Plug 'mhinz/vim-mix-format'
 " ejs support
 Plug 'nikvdp/ejs-syntax'
 
+" HTML support
+Plug 'mattn/emmet-vim'
+
 " Wakatime, a time spent coding tracker
 Plug 'wakatime/vim-wakatime'
 call plug#end()
