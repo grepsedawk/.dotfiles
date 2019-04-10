@@ -32,8 +32,13 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" fzf file fuzzy search
-nnoremap <C-p> :FZF<CR>
+" fzf file fuzzy search that respects .gitignore
+" Use :GFiles with these flags which essentially take any file that, is
+" tracked, staged, or appears as untracked in `git status`, resulting in
+" annoying directories like "deps" or "_build" being included in <C-p> results
+" It will also include results that wouldn't otherwise have been included such
+" as .circleci/config.yml
+nnoremap <C-p> :GFiles --exclude-standard --others --cached<CR>
 
 " ctags file setup
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
