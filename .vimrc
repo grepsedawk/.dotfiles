@@ -84,7 +84,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'thoughtbot/vim-rspec'
+Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0ng/vim-hybrid'
 
@@ -102,15 +102,11 @@ Plug 'nikvdp/ejs-syntax'
 
 " Wakatime, a time spent coding tracker
 Plug 'wakatime/vim-wakatime'
-
 call plug#end()
 
 " Theme
 colorscheme dracula
 highlight Normal ctermbg=None
-
-" Test Running
-let g:rspec_command = "!clear && bundle exec bin/rspec {spec}"
 
 let g:mix_format_on_save = 1
 
@@ -126,7 +122,7 @@ map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-rel
 map <leader>co mmgg"+yG`m
 map <leader>' cs"'
 map <leader>" cs'"
-map <Leader>o :w<cr>:call RunNearestSpec()<CR>
+map <Leader>o :w<cr>:TestNearest<CR>
 
 function! RenameFile()
   let old_name = expand('%')
