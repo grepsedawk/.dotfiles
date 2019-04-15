@@ -10,7 +10,7 @@ sudo -E apt install -y i3 wget curl git tmux shutter rxvt-unicode feh \
         acpi scrot nmap libreadline-dev tzdata
 
 if [ ! -d ~/.dotfiles ]; then
-  git clone git@github.com:pachonk/.dotfiles.git ~/.dotfiles || git clone https://github.com/pachonk/.dotfiles ~/.dotfiles
+  git clone git@github.com:grepsedawk/.dotfiles.git ~/.dotfiles || git clone https://github.com/grepsedawk/.dotfiles ~/.dotfiles
 fi
 
 $HOME/.dotfiles/install-scripts/vim/install.sh
