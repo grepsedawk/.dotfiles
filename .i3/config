@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvt
 
 # start a browser
-bindsym $mod+b exec sensible-browser
+bindsym $mod+b exec firefox
 
 # kill focused window
 bindsym $mod+Shift+q kill
