@@ -162,11 +162,10 @@ bar {
 bindsym $mod+control+l exec "sh ~/.i3/fuzzy_lock.sh"
 exec xautolock -time 5 -locker 'sh ~/.i3/fuzzy_lock.sh' &
 
-# NetworkManager
+# system tray startups
+exec --no-startup-id shutter --min_at_startup
+exec sleep 60 && discord --start-minimized
 exec --no-startup-id nm-applet
-
-# jetbrains toolbox app
-# exec jetbrains-toolbox --minimize
 
 # move workspace between monitors
 bindsym $mod+Tab exec i3-msg move workspace to output right
@@ -192,15 +191,8 @@ bindsym $mod+bracketright exec "~/.i3/audio_switcher speakers"
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
-# mouse speed
-# exec xset m 2.9 0
-
 # remap any keys needed
 exec_always xmodmap ~/.xmodmap
-
-# system tray startups
-exec --no-startup-id shutter --min_at_startup
-exec sleep 60 && discord --start-minimized
 
 # set up monitors
 bindsym $mod+m exec ~/.i3/setup_monitor_position
