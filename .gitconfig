@@ -2,7 +2,7 @@
 	name = Alex Piechowski
 	email = alex@piechowski.io
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /home/alex/.gitignore_global
 [push]
 	default = simple
@@ -10,16 +10,12 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
 [alias]
   d = difftool
   co-pr = !sh -c 'git fetch upstream pull/$1/head:pr/$1 && git checkout pr/$1' -
   ghclone = !sh -c 'git clone git@github.com:$1.git $2' -
+  sdiff = giff --cached
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
-[mergetool]
-	prompt = false
+  tool = nvim
+[mergetool "nvim"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
