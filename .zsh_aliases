@@ -1,0 +1,34 @@
+# additional git aliases
+alias gfc='git fetch upstream && git checkout upstream/master'
+alias gfr='git fetch upstream && git rebase -i upstream/master'
+
+# easy copy pasta
+alias copy='xclip -selection c'
+alias paste='xclip -out -selection c'
+
+# easy grepsedawk things
+getcol() {
+  num=$(expr $1 + 0)
+  awk "{ print \$$num }"
+}
+alias firstcol="getcol 1"
+
+# Easy disk over use identification
+alias diskusage="du -h -d1 2> /dev/null | sort -h"
+
+# mux for easier tmuxinator
+alias mux=tmuxinator
+
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
+rdygames() {
+  sudo service postgresql stop
+  sudo service mysql stop
+  sudo service mongod stop
+}
+
+code() {
+  cd ~/Code/$@
+}

@@ -28,3 +28,7 @@ stty -ixon
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
+
+if [ -f "$HOME/.env" ]; then
+    . "$HOME/.env"
+fi
