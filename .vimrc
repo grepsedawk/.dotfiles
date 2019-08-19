@@ -12,14 +12,20 @@ filetype plugin indent on
 " Add a line at col 80
 set colorcolumn=80
 
-" language specific, too
+" language specific tabbing
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype qf nnoremap <buffer> q :q<CR>
+
+" set default dispatch commands per file
+autocmd FileType sh let b:dispatch = './%'
 
 " live reload files if it changes on disk
 set autoread
-autocmd CursorHold * checktime
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * checktime
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 " word wrap more excellently
 nnoremap <expr> j v:count ? 'j' : 'gj'
@@ -34,19 +40,22 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set gdefault " replace option
 
 " fzf file fuzzy search that respects .gitignore
 " If in git directory, show only files that are committed, staged, or unstaged
 " else use regular :Files
 nnoremap <expr> <C-p> (len(system('git rev-parse')) ? ':Files' : ':GFiles --exclude-standard --others --cached')."\<cr>"
+" TODO: Directory edit for file creation (maybe even inc mkdir -p)
+" nnoremap <expr> <C-S-p> (len(system('git rev-parse')) ? ':Files' : ':GFiles --exclude-standard --others --cached')."\<cr>"
 
 " ctags file setup
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " use control s to save and exit insert mode
-map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>
+noremap <silent> <C-s> :update<CR>:Dispatch! git rev-parse && git ls-files \| ctags -L -<CR>:noh<CR>:set nopaste<CR>
+inoremap <silent> <C-s> <C-c>:update<CR>:Dispatch! git rev-parse && git ls-files \| ctags -L -<CR>:noh<CR>:set nopaste<CR>
 
 " additional escapes
 imap jk <esc>
@@ -76,15 +85,17 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Auto close "" () etc
-Plug 'cohama/lexima.vim'
+" BETA: Autocompletion
+Plug 'Valloric/YouCompleteMe'
+
+" Background processes made easy
+Plug 'tpope/vim-dispatch'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0ng/vim-hybrid'
 
@@ -111,10 +122,14 @@ Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 " Theme
-colorscheme dracula
+set background=dark
+colorscheme hybrid
 highlight Normal ctermbg=None
 
+" Plugin Configs
 let g:mix_format_on_save = 1
+
+let g:ale_fixers = {'ruby': ['rubocop']}
 
 " custom leader commands
 let mapleader = ","
@@ -122,14 +137,12 @@ let mapleader = ","
 map <leader>so :source $MYVIMRC<CR>
 map <Leader>vi :tabe ~/.vimrc<CR>
 map <Leader>vn :tabe notes.md<CR>
-map <Esc><Esc> :noh<CR>:set nopaste<CR>
 map <leader>r :!resize<CR><CR>
-map <leader>f :set paste<CR>mmggi# frozen_string_literal: true<CR><CR><Esc>`m:set nopaste<CR>
-map <leader>c :!ctags -R --languages=ruby --exclude=.git --exclude=log --tag-relative=yes . $(bundle list --paths)<CR>
+map <leader>f :ALEFix<CR>
 map <leader>co mmgg"+yG`m
 map <leader>' cs"'
 map <leader>" cs'"
-map <Leader>o :w<cr>:TestNearest<CR>
+map <Leader>o :Dispatch<cr>
 
 function! RenameFile()
   let old_name = expand('%')
