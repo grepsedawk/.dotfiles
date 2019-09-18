@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 sudo apt update -y
 sudo apt install -y mariadb-server libmariadb-dev
+
+touch "$HOME"/.env
 if ! grep -q "export MYSQL_PASSWORD" $HOME/.env; then
   MYSQL_USERNAME=`whoami`
   MYSQL_PASSWORD=`openssl rand -base64 32`
