@@ -1,6 +1,6 @@
 ! Fonts
-URxvt.font:     xft:Inconsolata:size=9
-URxvt.boldFont: xft:Inconsolata:bold:size=9
+URxvt.font:     xft:Inconsolata:size=12
+URxvt.boldFont: xft:Inconsolata:bold:size=12
 
 URxvt.letterSpace: -1
 
