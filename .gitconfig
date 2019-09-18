@@ -19,3 +19,5 @@
   tool = nvim
 [mergetool "nvim"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[commit]
+	verbose = true
