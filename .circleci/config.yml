@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:19.04
     working_directory: ~/.dotfiles/
 
     steps:
