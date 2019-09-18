@@ -92,6 +92,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-rails'
 Plug 'sheerun/vim-polyglot'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -131,6 +132,8 @@ highlight Normal ctermbg=None
 let g:mix_format_on_save = 1
 
 let g:ale_fixers = {'ruby': ['rubocop']}
+
+let g:splitjoin_ruby_hanging_args = 0
 
 " custom leader commands
 let mapleader = ","
