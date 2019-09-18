@@ -102,7 +102,6 @@ Plug 'autozimu/LanguageClient-neovim', {
 
 " Themes
 Plug 'blueshirts/darcula'
-Plug 'w0ng/vim-hybrid'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Colorize hex color strings
@@ -125,7 +124,7 @@ call plug#end()
 
 " Theme
 set background=dark
-colorscheme hybrid
+colorscheme darcula
 highlight Normal ctermbg=None
 
 " Plugin Configs
