@@ -43,6 +43,7 @@ bindsym $mod+Shift+q kill
 
 # use rofi to open programs
 bindsym $mod+d exec rofi -show run
+bindsym $mod+shift+d exec rofi -show drun
 
 # easy keybinding to type wow password, stored as env var
 bindsym $mod+p exec bash -c 'source ~/.env && sleep 0.2 && xdotool type --clearmodifiers "$WOW_PASSWORD"'
