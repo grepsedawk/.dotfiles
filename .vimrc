@@ -97,10 +97,14 @@ Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'sheerun/vim-polyglot'
-Plug 'w0ng/vim-hybrid'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Themes
 Plug 'blueshirts/darcula'
+Plug 'w0ng/vim-hybrid'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Colorize hex color strings
@@ -154,3 +158,10 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
+
+" Solargraph
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['/home/alex/.asdf/shims/solargraph', 'stdio'],
+    \ }
