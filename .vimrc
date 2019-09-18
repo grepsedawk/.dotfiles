@@ -146,6 +146,7 @@ map <leader>co mmgg"+yG`m
 map <leader>' cs"'
 map <leader>" cs'"
 map <Leader>o :Dispatch<cr>
+map <Leader>q @q
 
 function! RenameFile()
   let old_name = expand('%')
