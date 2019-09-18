@@ -85,9 +85,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" BETA: Autocompletion
-Plug 'Valloric/YouCompleteMe'
-
 " Background processes made easy
 Plug 'tpope/vim-dispatch'
 
