@@ -35,6 +35,9 @@ bindsym $mod+Return exec urxvt
 # start a browser
 bindsym $mod+b exec firefox
 
+# connect to Bose 700's
+bindsym $mod+t exec echo "connect 4C:87:5D:27:FF:15" | bluetoothctl
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
