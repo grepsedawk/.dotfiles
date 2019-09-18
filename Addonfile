@@ -36,8 +36,10 @@ curse_slug diminishingreturns
 
 # Collectionist/Goldmaking
 curse_slug all-the-things
+curse_slug rarity
 curse_slug lootappraiser
 curse_slug lootappraiser_challenge
+curse_slug BattlePetCageMatch
 
 # chat
 curse_slug wim-3
