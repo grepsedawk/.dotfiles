@@ -180,7 +180,7 @@ exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
 exec --no-startup-id "sh ~/.i3/wallpaper.sh"
 
 # flux
-exec --no-startup-id "redshift"
+exec --no-startup-id "redshift -t 5500:3600"
 
 # audio keybindings
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
