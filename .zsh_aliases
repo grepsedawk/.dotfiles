@@ -2,6 +2,9 @@
 alias gfc='git fetch upstream && git checkout upstream/master'
 alias gfr='git fetch upstream && git rebase -i upstream/master'
 
+# Install Ruby based on current Ruby version
+alias air='asdf install ruby "`cat .ruby-version`"'
+
 # easy copy pasta
 alias copy='xclip -selection c'
 alias paste='xclip -out -selection c'
