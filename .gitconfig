@@ -3,7 +3,7 @@
 	email = alex@piechowski.io
 [core]
 	editor = nvim
-	excludesfile = /home/alex/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
 [filter "lfs"]
