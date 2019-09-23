@@ -19,7 +19,7 @@ $HOME/.dotfiles/install-scripts/zsh/install.sh
 $HOME/.dotfiles/install-scripts/docker/install
 $HOME/.dotfiles/install-scripts/redis/install.sh
 $HOME/.dotfiles/install-scripts/thefuck/install.sh
-$HOME/.dotfiles/install-scripts/asdf/install.sh
+$HOME/.dotfiles/install-scripts/asdf/install
 # $HOME/.dotfiles/install-scripts/bc3/install.sh
 $HOME/.dotfiles/install-scripts/postgresql/install.sh
 $HOME/.dotfiles/install-scripts/maria-db/install.sh

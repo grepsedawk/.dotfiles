@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+
 if [ ! -d ~/.asdf ]; then
   git clone git@github.com:asdf-vm/asdf.git ~/.asdf --branch v0.3.0 || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.3.0
 fi
@@ -8,6 +9,7 @@ fi
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
-asdf install ruby 2.5.1
+latest_ruby=$(asdf list-all ruby | ag "^[2-9].[0-9].[0-9]$" | tail -1)
 
-asdf global ruby 2.5.1
+asdf install ruby $latest_ruby
+asdf global ruby $latest_ruby
