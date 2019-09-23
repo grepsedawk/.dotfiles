@@ -156,8 +156,8 @@ bar {
 }
 
 # lock
-bindsym $mod+control+l exec "sh ~/.i3/fuzzy_lock.sh"
-exec xautolock -time 15 -locker 'sh ~/.i3/fuzzy_lock.sh' &
+bindsym $mod+control+l exec 'sh ~/.i3/lock_screen'
+exec xautolock -time 15 -locker 'sh ~/.i3/lock_screen' &
 
 # system tray startups
 exec --no-startup-id shutter --min_at_startup
