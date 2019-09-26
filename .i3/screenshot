@@ -1,0 +1,11 @@
+#/usr/bin/env bash
+
+sleep 0.2
+
+set -e
+
+DEST="$HOME"/Pictures/Screenshots
+
+mkdir -p "$DEST"
+cd "$DEST"
+scrot -s -e 'xclip -selection c -t image/png -i $f'

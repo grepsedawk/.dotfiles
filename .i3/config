@@ -203,4 +203,4 @@ workspace 4 output DP-0
 exec --no-startup-id compton
 
 # Easy shortcut to take a screenshot
-bindsym $mod+c exec shutter -s -c -d 2
+bindsym $mod+c exec ~/.i3/screenshot 2>> /tmp/screenielog
