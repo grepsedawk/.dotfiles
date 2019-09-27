@@ -1,14 +1,17 @@
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR='vim'
 
-ZSH_THEME="robbyrussell"
-HYPHEN_INSENSITIVE="true"
-COMPLETION_WAITING_DOTS="true"
-ZSH_TMUX_AUTOSTART=true
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
+
+ZSH_THEME="robbyrussell"
+HYPHEN_INSENSITIVE="true"
+CASE_SENSITIVE="false"
+COMPLETION_WAITING_DOTS="true"
+ZSH_TMUX_AUTOSTART=true
 HIST_STAMPS="yyyy-mm-dd"
+DISABLE_UPDATE_PROMPT="true"
 
 # Plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
