@@ -10,11 +10,6 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[alias]
-  d = difftool
-  co-pr = !sh -c 'git fetch upstream pull/$1/head:pr/$1 && git checkout pr/$1' -
-  ghclone = !sh -c 'git clone git@github.com:$1.git $2' -
-  sdiff = giff --cached
 [merge]
   tool = nvim
 [mergetool "nvim"]

@@ -12,7 +12,8 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git rails bundler tmux tmuxinator asdf docker docker-compose)
+plugins=(git github rails bundler tmux tmuxinator asdf docker docker-compose \
+         zsh_reload)
 
 source $ZSH/oh-my-zsh.sh
 
