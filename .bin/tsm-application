@@ -1,0 +1,3 @@
+#/bin/bash
+
+WINEPREFIX=/home/alexpiechowski/Games/tradeskillmaster wine ~/Games/tradeskillmaster/drive_c/TradeSkillMaster/app/TSMApplication.exe
