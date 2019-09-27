@@ -192,10 +192,14 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 exec_always xmodmap ~/.xmodmap
 
 # set up monitors
-bindsym $mod+m exec ~/.i3/setup_monitor_position
-# and workspaces, too
-workspace 1 output DP-2
-workspace 2 output DP-4
+# bindsym $mod+m exec ~/.i3/setup_monitor_position
+exec_always /usr/bin/nvidia-settings --load-config-only
+
+# number workspaces
+# workspace 1 output DP-2
+# workspace 2 output DP-4
+workspace 1 output HDMI-0
+workspace 2 output DP-0
 workspace 3 output HDMI-0
 workspace 4 output DP-0
 
