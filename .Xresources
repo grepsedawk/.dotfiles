@@ -1,3 +1,5 @@
+Xft.dpi: 220
+
 ! Fonts
 URxvt.font:     xft:Inconsolata:size=10
 URxvt.boldFont: xft:Inconsolata:bold:size=10
