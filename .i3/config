@@ -39,9 +39,6 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 bindsym $mod+shift+d exec rofi -show drun
 
-# easy keybinding to type wow password, stored as env var
-bindsym $mod+p exec bash -c 'source ~/.env && sleep 0.2 && xdotool type --clearmodifiers "$WOW_PASSWORD"'
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -148,6 +145,15 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+mode "clicky" {
+    bindsym s exec --no-startup-id ~/.i3/mouse set main
+    bindsym d exec --no-startup-id "~/.i3/mouse get cast && xdotool click 1"
+    bindsym f exec --no-startup-id ~/.i3/mouse get main
+    bindsym c exec --no-startup-id ~/.i3/mouse set cast
+    bindsym Escape mode "default"
+}
+bindsym $mod+g mode "clicky"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

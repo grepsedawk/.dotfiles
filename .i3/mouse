@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mkdir -p /tmp/mouse/
+
+if [[ "$1" == "get" ]] ; then
+  source /tmp/mouse/"$2"
+  xdotool mousemove $X $Y
+  exit 0
+fi
+
+if [[ "$1" == "set" ]] ; then
+  xdotool getmouselocation --shell > /tmp/mouse/"$2"
+  exit 0
+fi
+
+
+exit 1
