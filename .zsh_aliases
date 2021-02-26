@@ -1,6 +1,9 @@
 # additional git aliases
-alias gfc='git fetch upstream && git checkout upstream/master'
-alias gfr='git fetch upstream && git rebase -i upstream/master'
+alias gfcu='git fetch upstream && git checkout upstream/main'
+alias gfru='git fetch upstream && git rebase -i upstream/main'
+
+alias gfc='git fetch origin && git checkout origin/main'
+alias gfr='git fetch origin && git rebase -i origin/main'
 
 # Install Ruby based on current Ruby version
 alias air='asdf install ruby "`cat .ruby-version`"'
