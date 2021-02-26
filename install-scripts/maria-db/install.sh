@@ -16,3 +16,5 @@ EOF
   sudo mysql -e "CREATE USER '${MYSQL_USERNAME}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}'"
   sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USERNAME}'@'localhost';"
 fi
+
+sudo systemctl disable mysql
