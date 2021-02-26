@@ -1,13 +1,17 @@
-Xft.dpi: 220
+! Xft.dpi: 180
+! rofi.dpi: 180
+
+Xft.dpi: 100
+rofi.dpi: 100
 
 ! Fonts
-URxvt.font:     xft:Inconsolata:size=10
-URxvt.boldFont: xft:Inconsolata:bold:size=10
+URxvt.font:     xft:Inconsolata:size=12
+URxvt.boldFont: xft:Inconsolata:bold:size=12
 
 URxvt.letterSpace: -1
 
-! urxvt.transparent: true
-urxvt.shading: 15
+URxvt.depth: 32
+URxvt.background: [98]#282A36
 urxvt.scrollBar: false
 urxvt.cursorBlink: true
 
