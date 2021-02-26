@@ -5,7 +5,7 @@ set -e
 
 sudo apt update
 sudo -E apt install -y i3 wget curl git tmux rxvt-unicode feh \
-	silversearcher-ag build-essential tcl libqt4-dev libqtwebkit-dev \
+	silversearcher-ag build-essential tcl \
         scrot redshift xautolock xclip libssl-dev zlib1g-dev xclip \
         acpi scrot nmap libreadline-dev tzdata rofi pavucontrol
 
