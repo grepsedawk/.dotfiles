@@ -7,7 +7,8 @@ sudo apt update
 sudo -E apt install -y i3 wget curl git tmux rxvt-unicode feh \
 	silversearcher-ag build-essential tcl \
         scrot redshift xautolock xclip libssl-dev zlib1g-dev xclip \
-        acpi scrot nmap libreadline-dev tzdata rofi pavucontrol
+        acpi scrot nmap libreadline-dev tzdata rofi pavucontrol \
+        compton exuberant-ctags
 
 if [ ! -d ~/.dotfiles ]; then
   git clone git@github.com:grepsedawk/.dotfiles.git ~/.dotfiles || git clone https://github.com/grepsedawk/.dotfiles ~/.dotfiles
