@@ -192,8 +192,8 @@ bindsym $mod+bracketleft exec "~/.i3/audio_switcher yeti"
 bindsym $mod+bracketright exec "~/.i3/audio_switcher speakers"
 
 # screen brightness keybindings
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec ~/.i3/xbacklight -dec 2500
+bindsym XF86MonBrightnessUp exec ~/.i3/xbacklight -inc 2500
 
 # remap any keys needed
 exec_always --no-startup-id xmodmap ~/.xmodmap
