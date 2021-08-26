@@ -1,6 +1,3 @@
-[user]
-	name = Alex Piechowski
-	email = alex@piechowski.io
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
@@ -10,9 +7,15 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
 [merge]
   tool = nvim
 [mergetool "nvim"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [commit]
 	verbose = true
+[pull]
+	rebase = true
+
+[include]
+	path = ./.gitconfig.local
