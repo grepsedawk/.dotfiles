@@ -36,3 +36,14 @@ fi
 if [ -f "$HOME/.env" ]; then
     . "$HOME/.env"
 fi
+
+if [ -d "$HOME/.bin" ] ; then
+    PATH="$HOME/.bin:$PATH"
+fi
+
+if [ -f "$HOME/.env" ]; then
+    . "$HOME/.env"
+fi
+
+FZF_CTRL_T_COMMAND="ag -g ''"
+FZF_DEFAULT_COMMAND="ag -g ''"
