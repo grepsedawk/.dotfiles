@@ -33,6 +33,7 @@ rdygames() {
   sudo service postgresql stop
   sudo service mysql stop
   sudo service mongod stop
+  sudo service docker stop
 }
 
 code() {
