@@ -41,8 +41,8 @@ if [ -d "$HOME/.bin" ] ; then
     PATH="$HOME/.bin:$PATH"
 fi
 
-if [ -f "$HOME/.env" ]; then
-    . "$HOME/.env"
+if [ -d "/snap/bin" ] ; then
+    PATH="/snap/bin:$PATH"
 fi
 
 FZF_CTRL_T_COMMAND="ag -g ''"
