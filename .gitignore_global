@@ -4,3 +4,5 @@
 tags
 notes.md
 production.sql
+
+*.tmp
