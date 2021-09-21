@@ -3,6 +3,6 @@ pry
 rubocop
 reek
 brakeman
-tmuxinator
 neovim
 solargraph
+finie
