@@ -99,17 +99,17 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-rails'
 Plug 'sheerun/vim-polyglot'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Themes
 Plug 'blueshirts/darcula'
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Colorize hex color strings
 Plug 'chrisbra/Colorizer'
