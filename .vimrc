@@ -77,8 +77,15 @@ inoremap <Left> <nop>
 inoremap <Right> <nop>
 
 " Plugins!
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
+
 Plug 'christoomey/vim-tmux-navigator'
 
 " Fuzzy searching
@@ -120,17 +127,31 @@ Plug 'mattn/emmet-vim'
 
 " Wakatime, a time spent coding tracker
 Plug 'wakatime/vim-wakatime'
+
+" hardmode
+Plug 'takac/vim-hardtime'
+" let g:hardtime_default_on = 1
+
+Plug 'tpope/vim-endwise'
 call plug#end()
 
 " Theme
-set background=dark
-colorscheme darcula
+packadd! dracula_pro
+" syntax enable
+let g:dracula_colorterm = 0
+colorscheme dracula_pro
+" set background=dark
+" colorscheme darcula
 highlight Normal ctermbg=None
 
 " Plugin Configs
 let g:mix_format_on_save = 1
 
-let g:ale_fixers = {'ruby': ['rubocop']}
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'ruby': ['rubocop'],
+      \ 'terraform': ['terraform'],
+      \ }
 
 let g:splitjoin_ruby_hanging_args = 0
 
@@ -147,6 +168,8 @@ map <leader>' cs"'
 map <leader>" cs'"
 map <Leader>o :Dispatch<cr>
 map <Leader>q @q
+map <Leader>t :Tags<cr>
+map <leader>g :Git 
 
 function! RenameFile()
   let old_name = expand('%')
@@ -158,10 +181,3 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
-
-" Solargraph
-set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['/home/alex/.asdf/shims/solargraph', 'stdio'],
-    \ }
