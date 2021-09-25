@@ -32,7 +32,7 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " relative line numbers
-set relativenumber 
+set relativenumber
 set number
 
 " search options
@@ -109,7 +109,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Themes
 Plug 'blueshirts/darcula'
-" Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Colorize hex color strings
 Plug 'chrisbra/Colorizer'
@@ -139,7 +139,7 @@ call plug#end()
 packadd! dracula_pro
 " syntax enable
 let g:dracula_colorterm = 0
-colorscheme dracula_pro
+colorscheme dracula_pro_buffy
 " set background=dark
 " colorscheme darcula
 highlight Normal ctermbg=None
@@ -169,7 +169,7 @@ map <leader>" cs'"
 map <Leader>o :Dispatch<cr>
 map <Leader>q @q
 map <Leader>t :Tags<cr>
-map <leader>g :Git 
+map <leader>g :Git
 
 function! RenameFile()
   let old_name = expand('%')
