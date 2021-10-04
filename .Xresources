@@ -26,7 +26,7 @@ URxvt*cutchars: ()*,<>[]{}|`""''
 ! Dracula Pro Xresources palette
 ! ! special
 *.foreground:   #f8f8f2
-*.background:   [98]#22212c
+*.background:   #22212c
 *.cursorColor:  #f8f8f2
 
 ! black
