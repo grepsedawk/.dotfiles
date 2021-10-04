@@ -40,3 +40,5 @@ rdygames() {
 code() {
   cd ~/Code/$@
 }
+
+alias a="alias | fzf"
