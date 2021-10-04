@@ -2,7 +2,7 @@
 
 class Dotfile
   attr_reader :filename
-  IGNORED_DOTFILES = %w[. .. .git .circleci].freeze
+  IGNORED_DOTFILES = %w[. .. .git .circleci .gitignore].freeze
 
   def initialize(filename)
     @filename = filename
