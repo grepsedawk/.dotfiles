@@ -5,6 +5,7 @@
 ;; Don't ask me to follow symlinks
 (setq vc-follow-symlinks t)
 
+(global-set-key (kbd "C-s") 'save-buffer)
 ;; Package Installs
 (require 'package)
 (add-to-list 'package-archives
