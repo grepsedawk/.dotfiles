@@ -1,0 +1,8 @@
+name: Run Install Script
+on: [push]
+jobs:
+  install-script-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: ./install-scripts/install.sh
