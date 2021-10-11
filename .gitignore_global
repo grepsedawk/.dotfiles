@@ -2,7 +2,12 @@
 *.orig
 *.swp
 tags
+TAGS
 notes.md
 production.sql
 
 *.tmp
+
+# emacs
+\#*\#
+.\#*
