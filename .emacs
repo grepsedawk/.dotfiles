@@ -34,6 +34,9 @@
 (install 'fzf)
 (define-key evil-normal-state-map "\C-p" 'fzf-git-files)
 
+(install 'wakatime-mode)
+(global-wakatime-mode)
+
 ;; vim-tmux-navigator stolen from https://github.com/keith/evil-tmux-navigator
 (global-unset-key (kbd "C-h"))
 
