@@ -5,6 +5,11 @@ export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 
+
+if [ -d /opt/asdf-vm ]; then
+  ASDF_DIR=/opt/asdf-vm
+fi
+
 ZSH_THEME="robbyrussell"
 HYPHEN_INSENSITIVE="true"
 CASE_SENSITIVE="false"
