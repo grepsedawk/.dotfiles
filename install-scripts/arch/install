@@ -5,4 +5,15 @@ set -e
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 sudo pacman -Syy
-sudo pacman -S --noconfirm - < "$SCRIPT_DIR"/pkglist.txt
+
+if ! command -v yay &> /dev/null
+then
+  echo "Installing yay"
+  sudo pacman -S --needed git base-devel
+  tmp_dir=$(mktemp -d)
+  git clone https://aur.archlinux.org/yay.git $tmp_dir
+  cd $tmp_dir
+  makepkg -si --noconfirm
+fi
+
+yay -S --noconfirm - < "$SCRIPT_DIR"/pkglist.txt

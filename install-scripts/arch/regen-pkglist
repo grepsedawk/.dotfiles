@@ -1,4 +1,4 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-pacman -Qqen > "$SCRIPT_DIR"/pkglist.txt
+yay -Qqe > "$SCRIPT_DIR"/pkglist.txt

@@ -6,6 +6,7 @@ bison
 bluez-utils
 chrony
 code
+consolas-font
 dhcpcd
 discord
 efibootmgr
@@ -15,6 +16,7 @@ firefox
 flex
 gcc
 git
+google-chrome
 grub
 i3-gaps
 i3status
@@ -23,6 +25,7 @@ linux
 linux-firmware
 m4
 make
+nerd-fonts-complete
 noto-fonts
 noto-fonts-emoji
 openssh
@@ -36,6 +39,7 @@ rofi
 ruby
 rxvt-unicode
 scrot
+slack-desktop
 sudo
 terminus-font
 texinfo
@@ -99,4 +103,5 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 xterm
+yay
 zsh
