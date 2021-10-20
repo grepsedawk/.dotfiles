@@ -1,7 +1,14 @@
 # Windows key for mod
 set $mod Mod4
 
-font pango:Cascadia Code Condensed 10
+font pango:Jetbrains Mono 10
+
+for_window [class="^.*"] border pixel 2
+gaps inner 10
+gaps outer 10
+
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
@@ -34,7 +41,7 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvt
 
 # start a browser
-bindsym $mod+b exec sensible-browser
+bindsym $mod+b exec google-chrome-stable
 
 # connect to Bose 700's
 bindsym $mod+t exec echo "connect 4C:87:5D:27:FF:15" | bluetoothctl
@@ -203,7 +210,7 @@ exec_always --no-startup-id xmodmap ~/.xmodmap
 exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
 
 # use compton for composition
-exec --no-startup-id compton
+exec --no-startup-id picom --config ~/.picom.conf
 
 # Easy shortcut to take a screenshot
 bindsym $mod+shift+s exec ~/.i3/screenshot 2>> /tmp/screenielog

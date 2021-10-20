@@ -37,8 +37,4 @@ rdygames() {
   sudo service docker stop
 }
 
-code() {
-  cd ~/Code/$@
-}
-
 alias a="alias | fzf"
