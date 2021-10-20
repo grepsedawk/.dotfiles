@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+sudo pacman -Syy
+sudo pacman -S --noconfirm - < "$SCRIPT_DIR"/pkglist.txt

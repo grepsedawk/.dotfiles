@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-export DEBIAN_FRONTEND=noninteractive
 set -e
 
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 if [ -f /etc/lsb-release ]; then
+  export DEBIAN_FRONTEND=noninteractive
+
   sudo apt update
   sudo -E apt install -y i3 wget curl git tmux rxvt-unicode feh \
     silversearcher-ag build-essential tcl \
@@ -29,4 +32,8 @@ if [ -f /etc/lsb-release ]; then
   # load in asdf for Ruby that was only JUST installed above
   . $HOME/.asdf/asdf.sh
   $HOME/.dotfiles/install-scripts/link-dotfiles.rb
+fi
+
+if [ -f /etc/arch-release ]; then
+  "$SCRIPT_DIR"/arch/install
 fi
