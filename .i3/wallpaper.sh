@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 WALLPAPERS="$HOME"/.i3/wallpaper/
 TIME=1m
 while [ true ];

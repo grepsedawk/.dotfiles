@@ -27,6 +27,7 @@ URxvt*cutchars: ()*,<>[]{}|`""''
 ! ! special
 *.foreground:   #f8f8f2
 *.background:   #22212c
+URxvt.background: [95]#22212c
 *.cursorColor:  #f8f8f2
 
 ! black
