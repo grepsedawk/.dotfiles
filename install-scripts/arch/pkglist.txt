@@ -33,7 +33,6 @@ pkgconf
 pulseaudio
 pulseaudio-bluetooth
 rofi
-ruby
 rxvt-unicode
 scrot
 slack-desktop
