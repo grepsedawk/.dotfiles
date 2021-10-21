@@ -28,6 +28,7 @@ linux
 linux-firmware
 m4
 make
+neovim
 openssh
 patch
 pavucontrol
