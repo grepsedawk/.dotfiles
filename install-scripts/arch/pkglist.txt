@@ -37,6 +37,7 @@ pkgconf
 pulseaudio
 pulseaudio-bluetooth
 rofi
+runelite
 rxvt-unicode
 scrot
 slack-desktop
