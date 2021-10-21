@@ -9,6 +9,8 @@ chrony
 code
 dhcpcd
 discord
+docker
+docker-compose
 efibootmgr
 fakeroot
 feh
@@ -16,6 +18,7 @@ firefox
 flex
 gcc
 git
+git-lfs
 google-chrome
 grub
 i3-gaps
