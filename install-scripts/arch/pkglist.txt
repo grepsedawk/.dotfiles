@@ -29,6 +29,7 @@ linux-firmware
 m4
 make
 neovim
+noto-fonts-emoji
 openssh
 patch
 pavucontrol
@@ -46,6 +47,7 @@ texinfo
 the_silver_searcher
 tmux
 ttf-jetbrains-mono
+ttf-mac-fonts
 vim
 wget
 which
