@@ -26,3 +26,10 @@ latest_ruby=$(asdf list-all ruby | ag "^[2-9].[0-9].[0-9]$" | tail -1)
 
 asdf install ruby $latest_ruby
 asdf global ruby $latest_ruby
+
+mkdir -p ~/.config/nvim/
+cat << EOF > $HOME/.config/nvim/init.vim
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+EOF
