@@ -33,6 +33,7 @@ noto-fonts-emoji
 openssh
 patch
 pavucontrol
+peek
 picom
 pkgconf
 pulseaudio
