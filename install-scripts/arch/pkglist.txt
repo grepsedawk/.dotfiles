@@ -38,6 +38,7 @@ peek
 picom
 pkgconf
 pop-bin
+powertop
 pulseaudio
 pulseaudio-bluetooth
 rofi
