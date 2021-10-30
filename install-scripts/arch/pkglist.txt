@@ -37,6 +37,7 @@ pavucontrol
 peek
 picom
 pkgconf
+pop-bin
 pulseaudio
 pulseaudio-bluetooth
 rofi
