@@ -29,6 +29,7 @@ linux-firmware
 m4
 make
 neovim
+nmap
 noto-fonts-emoji
 openssh
 patch
