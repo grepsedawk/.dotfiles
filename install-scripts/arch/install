@@ -20,8 +20,8 @@ yay -S --noconfirm - < "$SCRIPT_DIR"/pkglist.txt
 
 # asdf
 . /opt/asdf-vm/asdf.sh
-asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git || true
+asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git || true
 
 latest_ruby=$(asdf list-all ruby | ag "^[2-9].[0-9].[0-9]$" | tail -1)
 
@@ -35,4 +35,4 @@ let &packpath = &runtimepath
 source ~/.vimrc
 EOF
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+[ -d ~/.oh-my-zsh ] || sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
