@@ -9,7 +9,7 @@ sudo pacman -Syy
 if ! command -v yay &> /dev/null
 then
   echo "Installing yay"
-  sudo pacman -S --needed git base-devel
+  sudo pacman -S --noconfirm --needed git base-devel
   tmp_dir=$(mktemp -d)
   git clone https://aur.archlinux.org/yay.git $tmp_dir
   cd $tmp_dir
@@ -19,6 +19,7 @@ fi
 yay -S --noconfirm - < "$SCRIPT_DIR"/pkglist.txt
 
 # asdf
+. /opt/asdf-vm/asdf.sh
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
@@ -33,3 +34,5 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 EOF
+
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

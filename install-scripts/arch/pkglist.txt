@@ -20,10 +20,12 @@ gcc
 git
 git-lfs
 google-chrome
+groff
 grub
 i3-gaps
 i3status
 iwd
+libtool
 linux
 linux-firmware
 m4

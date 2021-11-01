@@ -31,9 +31,11 @@ if [ -f /etc/lsb-release ]; then
 
   # load in asdf for Ruby that was only JUST installed above
   . $HOME/.asdf/asdf.sh
-  $HOME/.dotfiles/install-scripts/link-dotfiles.rb
 fi
 
 if [ -f /etc/arch-release ]; then
   "$SCRIPT_DIR"/arch/install
+  . /opt/asdf-vm/asdf.sh
 fi
+
+$SCRIPT_DIR/link-dotfiles.rb
