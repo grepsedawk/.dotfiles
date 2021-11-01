@@ -19,6 +19,7 @@ flex
 gcc
 git
 git-lfs
+github-cli
 google-chrome
 groff
 grub
