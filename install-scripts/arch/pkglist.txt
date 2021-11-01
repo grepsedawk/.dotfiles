@@ -52,6 +52,7 @@ slack-desktop
 sudo
 texinfo
 the_silver_searcher
+thefuck
 tmux
 ttf-jetbrains-mono
 ttf-mac-fonts
