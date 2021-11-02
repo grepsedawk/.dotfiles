@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+export DEBIAN_FRONTEND=noninteractive
+
+sudo apt update
+sudo -E apt install -y i3 wget curl git tmux rxvt-unicode feh \
+  silversearcher-ag build-essential tcl \
+  scrot redshift xautolock xclip libssl-dev zlib1g-dev xclip \
+  acpi scrot nmap libreadline-dev tzdata rofi pavucontrol \
+  compton exuberant-ctags emacs
+
+if [ ! -d ~/.dotfiles ]; then
+  git clone git@github.com:grepsedawk/.dotfiles.git ~/.dotfiles || git clone https://github.com/grepsedawk/.dotfiles ~/.dotfiles
+fi
+
+$SCRIPT_DIR/vim/install.sh
+$SCRIPT_DIR/google-chrome/install.sh
+$SCRIPT_DIR/zsh/install.sh
+$SCRIPT_DIR/docker/install
+$SCRIPT_DIR/redis/install.sh
+$SCRIPT_DIR/thefuck/install.sh
+$SCRIPT_DIR/asdf/install
+$SCRIPT_DIR/postgresql/install.sh
+$SCRIPT_DIR/maria-db/install.sh
