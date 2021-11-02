@@ -212,6 +212,8 @@ exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
 # use compton for composition
 exec --no-startup-id picom --config ~/.picom.conf
 
+exec --no-startup-id dunst
+
 # Easy shortcut to take a screenshot
 bindsym $mod+shift+s exec ~/.i3/screenshot 2>> /tmp/screenielog
 

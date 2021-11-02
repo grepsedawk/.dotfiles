@@ -11,6 +11,7 @@ dhcpcd
 discord
 docker
 docker-compose
+dunst
 efibootmgr
 fakeroot
 feh
