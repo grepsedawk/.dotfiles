@@ -87,7 +87,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -214,3 +214,6 @@ exec --no-startup-id picom --config ~/.picom.conf
 
 # Easy shortcut to take a screenshot
 bindsym $mod+shift+s exec ~/.i3/screenshot 2>> /tmp/screenielog
+
+bindsym $mod+semicolon exec "setxkbmap -layout us -variant dvorak -option compose:102 -option keypad:atm -option kpdl:semi"
+bindsym $mod+s exec "setxkbmap us"
