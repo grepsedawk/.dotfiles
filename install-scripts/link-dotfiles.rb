@@ -2,7 +2,9 @@
 
 class Dotfile
   attr_reader :filename
-  IGNORED_DOTFILES = %w[. .. .git .circleci .gitignore].freeze
+
+  IGNORED_DOTFILES = %w[. .. .git .github .circleci .gitignore].freeze
+  NESTED_LINKS = %w[.config].freeze
 
   def initialize(filename)
     @filename = filename
@@ -10,11 +12,19 @@ class Dotfile
 
   def self.link_path!(path)
     Dir.glob(File.join(path, '.*'))
-       .each { |dotfile| link!(dotfile) }
-  end
-
-  def self.link!(filename)
-    new(File.basename(filename)).link!
+       .map { |file| File.basename(file) }
+       .map do |file|
+         if NESTED_LINKS.include?(file)
+           Dir.glob("#{path}/#{file}/*")
+             .map { |f| f.match(/#{file}\/\w+/).to_s }
+         else
+           file
+         end
+       end
+       .flatten
+       .reject { |f| IGNORED_DOTFILES.include?(f) }
+       .map { |f| new(f) }
+       .each(&:link!)
   end
 
   def ignored?
@@ -41,9 +51,8 @@ class Dotfile
   end
 
   def link_path
-   "#{ENV['HOME']}/#{filename}"
+    "#{ENV['HOME']}/#{filename}"
   end
 end
 
 Dotfile.link_path!("#{ENV['HOME']}/.dotfiles/")
-
