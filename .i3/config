@@ -38,7 +38,7 @@ status_command i3status
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 # start a browser
 bindsym $mod+b exec google-chrome-stable
