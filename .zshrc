@@ -37,18 +37,3 @@ stty -ixon
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
-
-if [ -f "$HOME/.env" ]; then
-    . "$HOME/.env"
-fi
-
-if [ -d "$HOME/.bin" ] ; then
-    PATH="$HOME/.bin:$PATH"
-fi
-
-if [ -d "/snap/bin" ] ; then
-    PATH="/snap/bin:$PATH"
-fi
-
-FZF_CTRL_T_COMMAND="ag -g ''"
-FZF_DEFAULT_COMMAND="ag -g ''"
