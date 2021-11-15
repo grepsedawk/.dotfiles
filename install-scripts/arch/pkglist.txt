@@ -59,6 +59,7 @@ tmux
 ttf-jetbrains-mono
 ttf-mac-fonts
 vim
+vlc
 wget
 which
 xclip
