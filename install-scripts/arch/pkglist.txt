@@ -8,6 +8,7 @@ base
 binutils
 bison
 bluez-utils
+bpytop
 chrony
 code
 dhcpcd
