@@ -25,6 +25,7 @@ gcc
 git
 git-lfs
 github-cli
+godot
 google-chrome
 grub
 i3-gaps
