@@ -1,3 +1,3 @@
 xrdb ~/.Xresources
-pulseaudio --start
+start-pulseaudio-x11
 exec "i3"
