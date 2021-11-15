@@ -16,7 +16,7 @@ class Dotfile
        .map do |file|
          if NESTED_LINKS.include?(file)
            Dir.glob("#{path}/#{file}/*")
-             .map { |f| f.match(/#{file}\/\w+/).to_s }
+             .map { |f| f.match(/#{file}\/\S+/).to_s }
          else
            file
          end
