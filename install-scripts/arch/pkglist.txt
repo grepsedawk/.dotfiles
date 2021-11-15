@@ -2,6 +2,7 @@ alacritty
 asdf-vm
 autoconf
 automake
+awesome-terminal-fonts
 base
 binutils
 bison
