@@ -50,6 +50,7 @@ pulseaudio
 pulseaudio-bluetooth
 redshift
 rofi
+rtorrent
 runelite
 rxvt-unicode
 scrot
