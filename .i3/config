@@ -208,7 +208,7 @@ exec_always --no-startup-id xmodmap ~/.xmodmap
 
 # set up monitors
 # bindsym $mod+m exec ~/.i3/setup_monitor_position
-exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
+# exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
 
 # use compton for composition
 exec --no-startup-id picom --config ~/.picom.conf
