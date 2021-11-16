@@ -187,8 +187,7 @@ bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
 # battery notification/auto hibernate
 exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
 
-# wallpaper
-exec --no-startup-id "sh ~/.i3/wallpaper.sh"
+exec --no-startup-id ~/.i3/wallpaper.sh
 
 # flux
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent

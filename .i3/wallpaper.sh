@@ -1,10 +1,16 @@
 #!/bin/bash
 
+hsetroot -solid "#22212c"
+
 set -e
 
+. /opt/asdf-vm/asdf.sh
+
 WALLPAPERS="$HOME"/.i3/wallpaper/
-TIME=1m
+TIME=5m
 while [ true ];
 do
-    feh --randomize --bg-fill "$WALLPAPERS"; sleep $TIME
+    ruby ~/.i3/generate_wallpaper.rb
+    feh --bg-fill /tmp/wallpaper.png
+    sleep $TIME
 done &
