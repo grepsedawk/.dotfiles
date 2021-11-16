@@ -2,7 +2,17 @@
 
 class String
   def red
-    "\e[31m#{self}\e[0m"
+    color(31)
+  end
+
+  def green
+    color(32)
+  end
+
+  private
+
+  def color(code)
+    "\e[#{code}m#{self}\e[0m"
   end
 end
 class Dotfile
@@ -42,12 +52,14 @@ class Dotfile
     print "#{full_path} -> "
 
     if File.exist? link_path
-      puts File.symlink?(link_path) ? 'Already linked! :)' : 'File Exists (Delete and re-run)'.red
+      puts File.symlink?(link_path) ? 'Already linked'.green : 'File Exists (Delete and re-run)'.red
 
       return false
     end
 
     File.symlink(full_path, link_path)
+
+    puts 'Linked!'.green
   end
 
   def full_path
