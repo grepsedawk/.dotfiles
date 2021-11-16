@@ -42,7 +42,7 @@ openssh
 patch
 pavucontrol
 peek
-picom
+picom-git
 pkgconf
 pop-bin
 powertop
