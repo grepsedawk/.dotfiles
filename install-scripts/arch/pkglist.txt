@@ -1,3 +1,4 @@
+acpi
 act
 alacritty
 asdf-vm
