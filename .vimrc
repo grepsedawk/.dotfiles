@@ -133,6 +133,8 @@ Plug 'takac/vim-hardtime'
 " let g:hardtime_default_on = 1
 
 Plug 'tpope/vim-endwise'
+
+Plug 'github/copilot.vim'
 call plug#end()
 
 " Theme
