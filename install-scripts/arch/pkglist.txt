@@ -30,6 +30,7 @@ github-cli
 godot
 google-chrome
 grub
+hsetroot
 i3-gaps
 i3status
 iwd
@@ -67,6 +68,7 @@ thefuck
 tmux
 ttf-jetbrains-mono
 ttf-mac-fonts
+ttf-symbola
 vim
 vlc
 wget
