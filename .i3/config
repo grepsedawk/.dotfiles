@@ -175,11 +175,6 @@ bindsym $mod+g mode "clicky"
 bindsym $mod+control+l exec 'sh ~/.i3/lock_screen'
 # exec xautolock -time 15 -locker 'sh ~/.i3/lock_screen' &
 
-# system tray startups
-# exec --no-startup-id shutter --min_at_startup
-# exec sleep 60 && discord --start-minimized
-exec --no-startup-id nm-applet
-
 # move workspace between monitors
 bindsym $mod+Tab exec i3-msg move workspace to output right
 bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
@@ -215,6 +210,8 @@ exec_always --no-startup-id xmodmap ~/.xmodmap
 exec --no-startup-id picom --config ~/.picom.conf
 
 exec --no-startup-id dunst
+
+exec_always --no-startup-id ~/.i3/tray
 
 # Easy shortcut to take a screenshot
 bindsym $mod+shift+s exec ~/.i3/screenshot 2>> /tmp/screenielog
