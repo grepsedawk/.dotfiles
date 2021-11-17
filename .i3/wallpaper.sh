@@ -7,7 +7,7 @@ set -e
 . /opt/asdf-vm/asdf.sh
 
 WALLPAPERS="$HOME"/.i3/wallpaper/
-TIME=5m
+TIME=5
 while [ true ];
 do
     ruby ~/.i3/generate_wallpaper.rb

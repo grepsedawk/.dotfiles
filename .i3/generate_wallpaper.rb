@@ -25,9 +25,13 @@ resolution = `xdpyinfo | awk '/dimensions/ {print $2}'`.strip.split('x').map(&:t
 WIDTH = resolution[0]
 HEIGHT = resolution[1]
 
-png = ChunkyPNG::Image.new(WIDTH, HEIGHT, ChunkyPNG::Color.from_hex(BASE))
+png = if File.exist? '/tmp/wallpaper.png'
+        ChunkyPNG::Image.from_file('/tmp/wallpaper.png')
+      else
+        ChunkyPNG::Image.new(WIDTH, HEIGHT, ChunkyPNG::Color.from_hex(BASE))
+      end
 
-def add_spot(png)
+def add_spot(png, color)
   size = rand(50..200)
   spot = [rand(0..WIDTH), rand(0..HEIGHT)]
 
@@ -42,16 +46,19 @@ def add_spot(png)
 
   maxy = spot[1] + size
   maxy = HEIGHT - 1 if maxy >= HEIGHT
-  color = COLORS.sample
   (minx..maxx).each do |x|
     (miny..maxy).each do |y|
-      png[x, y] = ChunkyPNG::Color.from_hex(color)
+      png[x, y] = color
     end
   end
 end
 
-50.times do
-  add_spot(png)
+color = COLORS.sample
+
+if [true, false].sample
+  add_spot(png, color)
+else
+  png.circle(rand(0..WIDTH), rand(0..HEIGHT), rand(25..200), color, color)
 end
 
 png.save('/tmp/wallpaper.png', :fast_rgba)
