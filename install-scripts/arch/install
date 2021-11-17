@@ -16,7 +16,7 @@ then
   makepkg -si --noconfirm
 fi
 
-yay -S --noconfirm - < "$SCRIPT_DIR"/pkglist.txt
+yay -S --needed --noconfirm - < "$SCRIPT_DIR"/pkglist.txt
 
 # asdf
 . /opt/asdf-vm/asdf.sh
