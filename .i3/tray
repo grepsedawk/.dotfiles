@@ -1,0 +1,11 @@
+#!/bin/bash
+
+pkill -f pasystray
+pkill -f blueman-applet
+pkill -f iwgtk 
+pkill -f snixembed
+
+pasystray --notify=all &
+blueman-applet &
+snixembed &
+iwgtk --indicators &
