@@ -30,11 +30,6 @@ if type nvim > /dev/null 2>&1; then
 fi
 alias emacs='emacs -nw'
 
-rdygames() {
-  sudo service postgresql stop
-  sudo service mysql stop
-  sudo service mongod stop
-  sudo service docker stop
-}
-
 alias a="alias | fzf"
+
+eval $(thefuck --alias qwer)

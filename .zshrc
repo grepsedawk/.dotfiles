@@ -21,19 +21,8 @@ DISABLE_UPDATE_PROMPT="true"
 # Plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git github rails bundler terraform tmux tmuxinator asdf docker docker-compose \
-         ssh-agent heroku aws gh)
+         ssh-agent heroku aws gh fzf)
 
 source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
-
-eval $(thefuck --alias qwer)
-
-# for vim control+s (otherwise C^s locks and C^q unlocks)
-stty -ixon
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if type nvim > /dev/null 2>&1; then
-  alias vim='nvim'
-fi
