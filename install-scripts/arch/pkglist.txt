@@ -5,6 +5,8 @@ asdf-vm
 autoconf
 automake
 awesome-terminal-fonts
+aws-cli
+aws-session-manager-plugin
 base
 binutils
 bison
