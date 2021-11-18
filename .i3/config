@@ -55,7 +55,7 @@ bindsym $mod+t exec echo "connect 4C:87:5D:27:FF:15" | bluetoothctl
 bindsym $mod+Shift+q kill
 
 # menu
-bindsym $mod+ctrl+s exec rofi -show ssh
+bindsym $mod+c exec rofi -show ssh
 bindsym $mod+d exec rofi -show run
 bindsym $mod+shift+d exec rofi -show drun
 
