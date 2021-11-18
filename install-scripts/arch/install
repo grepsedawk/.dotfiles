@@ -18,6 +18,8 @@ fi
 
 cat "$SCRIPT_DIR"/pkglist.txt | xargs yay -S --needed --noconfirm
 
+sudo chsh -s `which zsh` `whoami`
+
 # asdf
 . /opt/asdf-vm/asdf.sh
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git || true
