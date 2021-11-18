@@ -11,8 +11,19 @@ RUN chown -R grepsedawk:grepsedawk .
 
 USER grepsedawk
 
-RUN ./install-scripts/install
-
 RUN mkdir $HOME/.ssh
 
-CMD /usr/sbin/zsh
+RUN ./install-scripts/install
+
+RUN yay -Syy --noconfirm x11vnc websockify-git novnc
+EXPOSE 6080
+
+ENV DISPLAY=:0.0
+
+CMD bash -c "\
+    Xvfb :0 -screen 0 1920x1080x24 > /dev/null 2>&1 & \
+    x11vnc > /dev/null 2>&1 & \
+    novnc > /dev/null 2>&1 & \
+    sleep 10 && i3 > /dev/null 2>&1 & \
+    zsh \
+    "

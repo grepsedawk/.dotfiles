@@ -16,7 +16,7 @@ then
   makepkg -si --noconfirm
 fi
 
-cat "$SCRIPT_DIR"/pkglist.txt | xargs yay -S --needed --noconfirm
+cat "$SCRIPT_DIR"/pkglist.txt | xargs yay -S --needed --noconfirm --removemake --batchinstall
 
 sudo chsh -s `which zsh` `whoami`
 
