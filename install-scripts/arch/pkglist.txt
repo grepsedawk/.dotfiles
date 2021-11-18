@@ -15,6 +15,7 @@ bluez-utils
 bpytop
 chrony
 code
+ctags
 cups
 dhcpcd
 discord
