@@ -2,13 +2,17 @@ FROM archlinux:latest
 
 RUN pacman -Syy --needed --noconfirm sudo
 
-RUN useradd --create-home test
-RUN echo "test ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN useradd --create-home grepsedawk
+RUN echo "grepsedawk ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-COPY . /home/test/.dotfiles
-WORKDIR /home/test/.dotfiles
-RUN chown -R test:test .
+COPY . /home/grepsedawk/.dotfiles
+WORKDIR /home/grepsedawk/.dotfiles
+RUN chown -R grepsedawk:grepsedawk .
 
-USER test
+USER grepsedawk
 
 RUN ./install-scripts/install
+
+RUN mkdir $HOME/.ssh
+
+CMD /usr/sbin/zsh
