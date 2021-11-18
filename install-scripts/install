@@ -4,7 +4,7 @@ set -e
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if [ -f /etc/lsb-release ]; then
+if command -v apt; then
   "$SCRIPT_DIR"/apt/install
   . $HOME/.asdf/asdf.sh
 fi
