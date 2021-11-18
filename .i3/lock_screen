@@ -6,6 +6,6 @@ trap revert SIGHUP SIGINT SIGTERM
 xset +dpms dpms 15 15 15
 
 # Lock screen displaying this image.
-i3lock -n --color 000000
+i3lock -n --image /tmp/wallpaper-blurred.png
 
 revert

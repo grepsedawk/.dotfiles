@@ -13,6 +13,7 @@ bluez-utils
 bpytop
 chrony
 code
+cups
 dhcpcd
 discord
 docker
@@ -24,9 +25,11 @@ feh
 firefox
 flex
 gcc
+ghostscript
 git
 git-lfs
 github-cli
+glxinfo
 godot
 google-chrome
 grub
