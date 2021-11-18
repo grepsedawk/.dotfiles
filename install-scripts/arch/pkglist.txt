@@ -58,6 +58,7 @@ peek
 picom-git
 pkgconf
 pop-bin
+postgresql
 powertop
 pulseaudio
 pulseaudio-bluetooth
