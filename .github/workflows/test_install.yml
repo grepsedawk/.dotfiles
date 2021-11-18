@@ -1,8 +1,15 @@
 name: Run Install Script
 on: [push]
 jobs:
-  install-script-run:
+  apt-install-script-run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - run: ./install-scripts/install
+
+
+  arch-install-script-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: docker build -f Dockerfile.arch .

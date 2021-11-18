@@ -12,5 +12,6 @@ while [ true ];
 do
     ruby ~/.i3/generate_wallpaper.rb
     feh --bg-fill /tmp/wallpaper.png
+    convert /tmp/wallpaper.png -blur 0x8 /tmp/wallpaper-blurred.png
     sleep $TIME
 done &
