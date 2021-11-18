@@ -46,6 +46,7 @@ neofetch
 neovim
 nmap
 noto-fonts-emoji
+oh-my-zsh-git
 openssh
 pasystray
 patch

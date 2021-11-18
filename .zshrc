@@ -1,4 +1,8 @@
-export ZSH=$HOME/.oh-my-zsh
+ZSH=$HOME/.oh-my-zsh
+if [ -d /usr/share/oh-my-zsh ]; then
+  ZSH=/usr/share/oh-my-zsh
+fi
+
 export EDITOR='vim'
 
 export HISTSIZE=1000000000
