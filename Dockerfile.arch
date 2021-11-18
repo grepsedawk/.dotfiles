@@ -5,9 +5,10 @@ RUN pacman -Syy --needed --noconfirm sudo
 RUN useradd --create-home test
 RUN echo "test ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-USER test
-
 COPY . /home/test/.dotfiles
 WORKDIR /home/test/.dotfiles
+RUN chown -R test:test .
+
+USER test
 
 RUN ./install-scripts/install
