@@ -4,14 +4,12 @@ set $mod Mod4
 font pango:Jetbrains Mono 10
 
 for_window [class="^.*"] border none
-# for_window [class="^.*"] gaps outer current plus 50
 gaps inner 10
 gaps outer 10
 
 bindsym $mod+z		gaps outer current plus 5
 bindsym $mod+Shift+z	gaps outer current minus 5
 
-# TODO: test section, do not commit
 focus_on_window_activation focus
 
 # class                 border  bground text    indicator child_border
