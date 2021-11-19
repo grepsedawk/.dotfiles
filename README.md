@@ -12,4 +12,4 @@ curl -fsSL https://raw.githubusercontent.com/grepsedawk/.dotfiles/master/install
 
 This is available via docker for shell/tmux/vim configs and also a web browser i3 demo
 
-Just run `docker -p 6080:6080 grepsedawk/dotfiles` then navigate to [localhost:6080](localhost:6080)
+Just run `docker run -it -p 6080:6080 grepsedawk/dotfiles` then navigate to [localhost:6080](localhost:6080)
