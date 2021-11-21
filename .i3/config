@@ -1,5 +1,4 @@
-set $super Mod4
-set $mod $super
+set $mod Mod4
 
 # startup
 exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
