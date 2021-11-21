@@ -195,8 +195,8 @@ bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
 
 
 # audio keybindings
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
+bindsym XF86AudioRaiseVolume exec "pactl -- set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume exec "pactl -- set-sink-volume 0 -5%"
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym $mod+bracketleft exec "~/.i3/audio_switcher yeti"
 bindsym $mod+bracketright exec "~/.i3/audio_switcher speakers"
