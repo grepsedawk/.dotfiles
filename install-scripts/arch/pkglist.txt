@@ -59,6 +59,7 @@ pavucontrol
 peek
 picom-git
 pkgconf
+playerctl
 pop-bin
 postgresql
 powertop

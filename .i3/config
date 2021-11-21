@@ -10,6 +10,13 @@ exec --no-startup-id picom --config ~/.picom.conf
 exec --no-startup-id dunst
 exec_always --no-startup-id ~/.i3/tray
 
+# audio keybindings
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%"
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPlay exec playerctl play-pause
+
 font pango:JetBrainsMono Nerd Font 10
 
 for_window [class="^.*"] border none
@@ -194,10 +201,6 @@ bindsym $mod+Tab exec i3-msg move workspace to output right
 bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
 
 
-# audio keybindings
-bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +5%"
-bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%"
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym $mod+bracketleft exec "~/.i3/audio_switcher yeti"
 bindsym $mod+bracketright exec "~/.i3/audio_switcher speakers"
 
