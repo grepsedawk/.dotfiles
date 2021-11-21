@@ -1,7 +1,17 @@
-# Windows key for mod
-set $mod Mod4
+set $super Mod4
+set $mod $super
 
-font pango:Jetbrains Mono 10
+# startup
+exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
+exec --no-startup-id ~/.i3/wallpaper.sh
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id redshift
+exec_always --no-startup-id xmodmap ~/.xmodmap
+exec --no-startup-id picom --config ~/.picom.conf
+exec --no-startup-id dunst
+exec_always --no-startup-id ~/.i3/tray
+
+font pango:JetBrainsMono Nerd Font 10
 
 for_window [class="^.*"] border none
 gaps inner 10
@@ -184,14 +194,6 @@ bindsym $mod+control+l exec ~/.i3/lock_screen
 bindsym $mod+Tab exec i3-msg move workspace to output right
 bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
 
-# battery notification/auto hibernate
-exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
-
-exec --no-startup-id ~/.i3/wallpaper.sh
-
-# flux
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
-exec --no-startup-id redshift
 
 # audio keybindings
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
@@ -204,19 +206,10 @@ bindsym $mod+bracketright exec "~/.i3/audio_switcher speakers"
 bindsym XF86MonBrightnessDown exec ~/.i3/xbacklight -dec 2500
 bindsym XF86MonBrightnessUp exec ~/.i3/xbacklight -inc 2500
 
-# remap any keys needed
-exec_always --no-startup-id xmodmap ~/.xmodmap
 
 # set up monitors
 # bindsym $mod+m exec ~/.i3/setup_monitor_position
 # exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
-
-# use compton for composition
-exec --no-startup-id picom --config ~/.picom.conf
-
-exec --no-startup-id dunst
-
-exec_always --no-startup-id ~/.i3/tray
 
 # Easy shortcut to take a screenshot
 bindsym $mod+shift+s exec ~/.i3/screenshot 2>> /tmp/screenielog
