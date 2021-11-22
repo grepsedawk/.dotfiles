@@ -9,7 +9,7 @@ if command -v apt; then
   . $HOME/.asdf/asdf.sh
 fi
 
-if [ -f /etc/arch-release ]; then
+if command -v pacman; then
   "$SCRIPT_DIR"/arch/install
   . /opt/asdf-vm/asdf.sh
 fi
