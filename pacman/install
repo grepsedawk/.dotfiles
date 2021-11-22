@@ -20,7 +20,6 @@ cat "$SCRIPT_DIR"/pkglist.txt | xargs yay -S --needed --noconfirm --removemake -
 
 sudo chsh -s `which zsh` `whoami`
 
-# asdf
 . /opt/asdf-vm/asdf.sh
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git || true
 asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git || true
@@ -29,3 +28,5 @@ latest_ruby=$(asdf list-all ruby | ag "^[2-9].[0-9].[0-9]$" | tail -1)
 
 asdf install ruby $latest_ruby
 asdf global ruby $latest_ruby
+
+nvim +PlugInstall +qall
