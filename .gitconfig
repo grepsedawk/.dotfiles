@@ -21,3 +21,5 @@
 	path = ./.gitconfig.local
 [rebase]
 	autosquash = true
+[init]
+	defaultBranch = main

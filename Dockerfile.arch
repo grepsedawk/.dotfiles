@@ -13,7 +13,7 @@ USER grepsedawk
 
 RUN mkdir $HOME/.ssh
 
-RUN ./install-scripts/install
+RUN ./install
 
 RUN yay -Syy --noconfirm x11vnc websockify-git novnc
 EXPOSE 6080
