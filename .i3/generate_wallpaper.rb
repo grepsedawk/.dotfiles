@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'chunky_png'
+require 'oily_png'
 
 BASE =  '#22212c'
 
@@ -61,4 +61,4 @@ else
   png.circle(rand(0..WIDTH), rand(0..HEIGHT), rand(25..200), color, color)
 end
 
-png.save('/tmp/wallpaper.png', :fast_rgba)
+png.save('/tmp/wallpaper.png', :fast_rgb)
