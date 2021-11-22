@@ -10,7 +10,7 @@ if command -v apt; then
 fi
 
 if command -v pacman; then
-  "$SCRIPT_DIR"/arch/install
+  "$SCRIPT_DIR"/pacman/install
   . /opt/asdf-vm/asdf.sh
 fi
 
