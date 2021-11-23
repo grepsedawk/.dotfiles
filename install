@@ -4,7 +4,7 @@ set -e
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if command -v apt; then
+if command -v apt-get; then
   "$SCRIPT_DIR"/apt/install
   . $HOME/.asdf/asdf.sh
 fi
