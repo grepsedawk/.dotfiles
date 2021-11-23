@@ -4,19 +4,21 @@ jobs:
   apt-install-script-run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        path: .dotfiles
       - run: ./install
 
   arch-install-script-run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - run: docker build -f Dockerfile.arch .
 
   mac-install:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        path: .dotfiles
       - run: ./install
       - run: ruby -v
       - run: ls -al ~
