@@ -20,7 +20,7 @@ bindsym XF86AudioPlay exec notify-send "Media Play/Pause" "$(playerctl play-paus
 
 font pango:JetBrainsMono Nerd Font 10
 
-for_window [class="^.*"] border none
+default_border none
 gaps inner 10
 gaps outer 10
 
