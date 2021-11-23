@@ -18,6 +18,8 @@ bindsym XF86AudioPrev exec notify-send "Media Previous" "$(playerctl previous 2>
 bindsym XF86AudioNext exec notify-send "Media Next" "$(playerctl next 2>&1)"
 bindsym XF86AudioPlay exec notify-send "Media Play/Pause" "$(playerctl play-pause 2>&1)"
 
+for_window [title="Live Caption"] floating enable
+
 font pango:JetBrainsMono Nerd Font 10
 
 default_border none
