@@ -1,4 +1,4 @@
 configuration {
-  theme: "Arc-Dark";
   dpi: 250;
 }
+@theme "Arc-Dark"
