@@ -81,6 +81,7 @@ tmux
 ttf-jetbrains-mono
 ttf-mac-fonts
 ttf-symbola
+unzip
 vim
 vlc
 wget
