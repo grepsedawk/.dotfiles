@@ -23,6 +23,7 @@ for_window [title="Live Caption"] floating enable
 font pango:JetBrainsMono Nerd Font 10
 
 default_border none
+smart_gaps on
 gaps inner 10
 gaps outer 10
 
