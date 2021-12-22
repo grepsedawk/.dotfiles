@@ -35,8 +35,10 @@ github-cli
 glxinfo
 godot
 google-chrome
+google-cloud-sdk
 grub
 hsetroot
+hugo
 i3-gaps
 i3lock
 i3status
@@ -44,13 +46,18 @@ iwd
 iwgtk
 linux
 linux-firmware
+llvm
+lyrebird
 m4
 make
+microsoft-edge-stable-bin
+minder
 neofetch
 neovim
 nerd-fonts-jetbrains-mono
 nmap
 noto-fonts-emoji
+obsidian
 oh-my-zsh-git
 openssh
 pasystray
@@ -65,6 +72,7 @@ postgresql
 powertop
 pulseaudio
 pulseaudio-bluetooth
+redis
 redshift
 rofi
 rtorrent
@@ -73,10 +81,12 @@ rxvt-unicode
 scrot
 slack-desktop
 snixembed-git
+steam
 sudo
 texinfo
 the_silver_searcher
-thefuck
+thefuck-git
+tmate
 tmux
 ttf-jetbrains-mono
 ttf-mac-fonts
@@ -87,6 +97,7 @@ vlc
 wget
 which
 xclip
+xdotool
 xf86-video-vesa
 xorg-bdftopcf
 xorg-docs
@@ -138,4 +149,5 @@ xorg-xwininfo
 xorg-xwud
 xterm
 yay
+zoom
 zsh
