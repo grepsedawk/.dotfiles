@@ -153,6 +153,7 @@ let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'ruby': ['rubocop'],
       \ 'terraform': ['terraform'],
+      \ 'crystal': ['crystal'],
       \ }
 
 let g:splitjoin_ruby_hanging_args = 0
