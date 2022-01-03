@@ -25,7 +25,15 @@ brew bundle --file=- <<EOF
 
   brew "postgres", restart_service: :changed
   brew "redis", restart_service: :changed
+
+  tap "luckyframework/homebrew-lucky"
+  brew "lucky"
+  brew "yarn"
+  brew "openssl"
 EOF
+
+# otherwise libssl headers aren't found
+brew unlink openssl && brew link openssl --force
 
 if [ ! -d ~/.oh-my-zsh ]; then
   git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
