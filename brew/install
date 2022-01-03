@@ -21,6 +21,8 @@ brew bundle --file=- <<EOF
   brew "tmux"
   cask "iterm2"
 
+  brew "discord"
+
   brew "gh"
 
   brew "postgres", restart_service: :changed
