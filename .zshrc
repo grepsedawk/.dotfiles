@@ -17,7 +17,7 @@ ZSH_THEME="robbyrussell"
 HYPHEN_INSENSITIVE="true"
 CASE_SENSITIVE="false"
 COMPLETION_WAITING_DOTS="true"
-ZSH_TMUX_AUTOSTART=$([[ $(cat /etc/hostname) != 'vanclam' ]] && echo true || echo false)
+ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_UNICODE=true
 HIST_STAMPS="yyyy-mm-dd"
 DISABLE_UPDATE_PROMPT="true"
