@@ -8,15 +8,9 @@ if ! command -v brew > /dev/null; then
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-if brew list | grep -Fq brew-cask; then
-  fancy_echo "Uninstalling old Homebrew-Cask ..."
-  brew uninstall --force brew-cask
-fi
-
 brew update --force # https://github.com/Homebrew/brew/issues/1151
 
 brew bundle --file=- <<EOF
-  brew "universal-ctags", args: ["HEAD"]
   brew "the_silver_searcher"
   brew "neovim"
   brew "zsh"
