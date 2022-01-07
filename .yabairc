@@ -1,5 +1,5 @@
 yabai -m config mouse_follows_focus on
-yabai -m config focus_follows_mouse autofocus
+yabai -m config focus_follows_mouse autoraise
 
 yabai -m config layout bsp
 yabai -m config top_padding 12
