@@ -3,6 +3,8 @@ alt - d : open -a Discord
 alt - s : open -a Slack
 alt - b : open -a Safari
 
+alt + shift - q : yabai -m window --close
+
 alt - w : yabai -m space --layout stack
 alt - e : yabai -m space --layout bsp
 alt - f : yabai -m window --toggle native-fullscreen
