@@ -1,4 +1,11 @@
 alt - return : open -a iTerm
+alt - d : open -a Discord
+alt - s : open -a Slack
+alt - b : open -a Safari
+
+alt - w : yabai -m space --layout stack
+alt - e : yabai -m space --layout bsp
+alt + shift - space : yabai -m window --toggle float
 
 alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
