@@ -5,6 +5,7 @@ alt - b : open -a Safari
 
 alt - w : yabai -m space --layout stack
 alt - e : yabai -m space --layout bsp
+alt - f : yabai -m window --toggle native-fullscreen
 alt + shift - space : yabai -m window --toggle float
 
 alt - h : yabai -m window --focus west
