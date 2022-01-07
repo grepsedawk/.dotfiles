@@ -17,10 +17,10 @@ brew bundle --file=- <<EOF
   brew "tmux"
   cask "iterm2"
 
-  brew "skhd"
-  brew "yabai"
+  brew "koekeishiya/formulae/skhd"
+  brew "koekeishiya/formulae/yabai"
 
-  brew "discord"
+  cask "discord"
 
   brew "gh"
 
@@ -30,11 +30,8 @@ brew bundle --file=- <<EOF
   tap "luckyframework/homebrew-lucky"
   brew "lucky"
   brew "yarn"
-  brew "openssl"
 EOF
 
-# otherwise libssl headers aren't found
-brew unlink openssl && brew link openssl --force
 
 if [ ! -d ~/.oh-my-zsh ]; then
   git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
