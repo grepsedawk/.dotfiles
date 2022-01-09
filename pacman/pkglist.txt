@@ -81,7 +81,6 @@ rxvt-unicode
 scrot
 slack-desktop
 snixembed-git
-steam
 sudo
 texinfo
 the_silver_searcher
