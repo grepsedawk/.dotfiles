@@ -1,7 +1,12 @@
-alt - return : open -a iTerm
+alt - return : open -a Alacritty
 alt - d : open -a Discord
 alt - s : open -a Slack
 alt - b : open -a Google\ Chrome
+alt - o : open -a Obsidian
+alt - t : open -a Tuple
+
+
+alt + shift - s : screencapture -ic
 
 alt + shift - q : yabai -m window --close
 
