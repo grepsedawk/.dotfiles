@@ -11,3 +11,6 @@ production.sql
 # emacs
 \#*\#
 .\#*
+
+# ugh
+.DS_Store
