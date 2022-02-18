@@ -9,13 +9,13 @@ set shiftwidth=2
 set softtabstop=2
 filetype plugin indent on
 
+
 " Add a line at col 80
 set colorcolumn=80
 
 " language specific tabbing
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd Filetype qf nnoremap <buffer> q :q<CR>
 
 " set default dispatch commands per file
