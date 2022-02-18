@@ -5,7 +5,10 @@ font:
   normal:
     family: JetBrainsMono Nerd Font
 
-background_opacity: 0.98
+window:
+  opacity: 0.98
+  decorations: none
+
 colors:
   primary:
     background: '0x22212c'
