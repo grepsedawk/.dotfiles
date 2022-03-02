@@ -10,7 +10,7 @@ alt + shift - s : screencapture -ic
 
 alt + shift - q : yabai -m window --close
 
-alt - w : yabai -m space --layout stack
+alt - w : yabai -m space --layout float
 alt - e : yabai -m space --layout bsp
 alt - f : yabai -m window --toggle native-fullscreen
 alt + shift - space : yabai -m window --toggle float
