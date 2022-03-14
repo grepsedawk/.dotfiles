@@ -78,13 +78,6 @@ inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
 
-" Plugins!
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -129,15 +122,6 @@ Plug 'nikvdp/ejs-syntax'
 
 " HTML support
 Plug 'mattn/emmet-vim'
-
-" Wakatime, a time spent coding tracker
-Plug 'wakatime/vim-wakatime'
-
-" hardmode
-Plug 'takac/vim-hardtime'
-" let g:hardtime_default_on = 1
-
-Plug 'github/copilot.vim'
 call plug#end()
 
 " Theme
