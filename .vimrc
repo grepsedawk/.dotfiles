@@ -85,8 +85,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'w0rp/ale'
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -94,8 +92,7 @@ let g:ale_fixers = {
       \ 'terraform': ['terraform'],
       \ 'crystal': ['crystal'],
       \ }
-
-Plug 'christoomey/vim-tmux-navigator'
+call plug#begin('~/.vim/plugged')
 
 " Fuzzy searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
