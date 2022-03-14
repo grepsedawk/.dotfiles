@@ -3,6 +3,8 @@ set mouse=c
 " turn on spell checking
 set spell
 
+let mapleader = ","
+
 " tabs to 2 spaces
 set expandtab
 set shiftwidth=2
@@ -77,7 +79,7 @@ inoremap <Left> <nop>
 inoremap <Right> <nop>
 
 " Plugins!
-if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -85,6 +87,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'ruby': ['rubocop'],
+      \ 'terraform': ['terraform'],
+      \ 'crystal': ['crystal'],
+      \ }
 
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -105,7 +114,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Themes
 Plug 'blueshirts/darcula'
@@ -115,7 +123,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'chrisbra/Colorizer'
 
 Plug 'tpope/vim-surround'
-Plug 'tmhedberg/matchit'
+" Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
 Plug 'mhinz/vim-mix-format'
 
@@ -132,8 +140,6 @@ Plug 'wakatime/vim-wakatime'
 Plug 'takac/vim-hardtime'
 " let g:hardtime_default_on = 1
 
-Plug 'tpope/vim-endwise'
-
 Plug 'github/copilot.vim'
 call plug#end()
 
@@ -146,32 +152,23 @@ colorscheme dracula_pro_buffy
 " colorscheme darcula
 highlight Normal ctermbg=None
 
-" Plugin Configs
-let g:mix_format_on_save = 1
-
-let g:ale_fixers = {
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \ 'ruby': ['rubocop'],
-      \ 'terraform': ['terraform'],
-      \ 'crystal': ['crystal'],
-      \ }
 
 let g:splitjoin_ruby_hanging_args = 0
 
 " custom leader commands
-let mapleader = ","
 " source vimrc
 map <leader>so :source $MYVIMRC<CR>
 map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>vl :tabe ~/.config/nvim/init.lua<CR>
 map <Leader>vn :tabe notes.md<CR>
 map <leader>r :!resize<CR><CR>
-map <leader>f :ALEFix<CR>
 map <leader>co mmgg"+yG`m
 map <leader>' cs"'
 map <leader>" cs'"
 map <Leader>o :Dispatch<cr>
 map <Leader>q @q
 map <Leader>t :Tags<cr>
+map <Leader>a :Ag<cr>
 map <leader>g :Git
 
 function! RenameFile()
