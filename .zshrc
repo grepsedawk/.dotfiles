@@ -7,7 +7,7 @@ export EDITOR='vim'
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
-setopt EXTENDED_HISTORY
+setopt EXTENDED_HISTORY SHARE_HISTORY
 
 if [ -d /opt/asdf-vm ]; then
   ASDF_DIR=/opt/asdf-vm

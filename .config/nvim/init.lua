@@ -5,8 +5,8 @@ file:close()
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  -- use 'neovim/nvim-lspconfig'
-  -- require'lspconfig'.crystalline.setup{}
+  use 'neovim/nvim-lspconfig'
+  require'lspconfig'.crystalline.setup{}
 
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'

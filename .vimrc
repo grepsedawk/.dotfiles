@@ -56,8 +56,8 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " use control s to save and exit insert mode
-noremap <silent> <C-s> :update<CR>:Dispatch! git rev-parse && git ls-files \| ctags -L -<CR>:noh<CR>:set nopaste<CR>
-inoremap <silent> <C-s> <C-c>:update<CR>:Dispatch! git rev-parse && git ls-files \| ctags -L -<CR>:noh<CR>:set nopaste<CR>
+noremap <silent> <C-s> :update<CR>:noh<CR>:set nopaste<CR>
+inoremap <silent> <C-s> <C-c>:update<CR>:noh<CR>:set nopaste<CR>
 
 " additional escapes
 imap jk <esc>

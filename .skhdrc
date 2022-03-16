@@ -6,6 +6,8 @@ alt - o : open -a Obsidian
 alt - t : open -a Tuple
 
 
+alt + shift - r : brew services restart skhd & brew services restart yabai
+
 alt + shift - s : screencapture -ic
 
 alt + shift - q : yabai -m window --close
