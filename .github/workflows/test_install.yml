@@ -8,8 +8,14 @@ jobs:
       - run: ./install
 
 
-  arch-install-script-run:
+  arch-docker-install-script-run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - run: docker build -f Dockerfile.arch .
+
+  arch-full-install-script-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: docker build -f Dockerfile.arch-full .

@@ -1,4 +1,28 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-yay -Qqe | grep -v nvidia > "$SCRIPT_DIR"/pkglist.txt
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -d|--docker)
+      DOCKER=true
+      shift
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+if [[ -n "$DOCKER" ]]; then
+  PKGLIST="$SCRIPT_DIR/pkglist.docker.txt"
+else
+  PKGLIST="$SCRIPT_DIR/pkglist.txt"
+fi
+
+yay -Qqe | grep -v nvidia > $PKGLIST

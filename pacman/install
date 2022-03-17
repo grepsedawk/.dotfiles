@@ -4,6 +4,23 @@ set -e
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -d|--docker)
+      DOCKER=true
+      shift
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
 sudo pacman -Syy
 
 if ! command -v yay &> /dev/null
@@ -16,7 +33,14 @@ then
   makepkg -si --noconfirm
 fi
 
-cat "$SCRIPT_DIR"/pkglist.txt | xargs yay -S --needed --noconfirm --removemake --batchinstall
+
+if [[ -n "$DOCKER" ]]; then
+  PKGLIST="$SCRIPT_DIR/pkglist.docker.txt"
+else
+  PKGLIST="$SCRIPT_DIR/pkglist.txt"
+fi
+
+cat $PKGLIST | xargs yay -S --needed --noconfirm --removemake --batchinstall
 
 sudo chsh -s `which zsh` `whoami`
 
