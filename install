@@ -10,7 +10,7 @@ if command -v apt > /dev/null && [ -f /etc/lsb-release ]; then
 fi
 
 if command -v pacman; then
-  "$SCRIPT_DIR"/pacman/install
+  "$SCRIPT_DIR"/pacman/install "$@"
   . /opt/asdf-vm/asdf.sh
 fi
 

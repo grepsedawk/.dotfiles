@@ -13,6 +13,6 @@ USER grepsedawk
 
 RUN mkdir $HOME/.ssh
 
-RUN ./install --docker
+RUN ./install
 
 CMD /bin/zsh
