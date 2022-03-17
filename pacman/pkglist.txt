@@ -80,11 +80,9 @@ runelite
 rxvt-unicode
 scrot
 slack-desktop
-snixembed-git
 sudo
 texinfo
 the_silver_searcher
-thefuck-git
 tmate
 tmux
 ttf-jetbrains-mono
