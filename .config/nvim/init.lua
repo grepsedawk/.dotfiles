@@ -23,6 +23,4 @@ require('packer').startup(function()
   use 'vim-crystal/vim-crystal'
 
   use 'github/copilot.vim'
-
-  use 'wakatime/vim-wakatime'
 end)
