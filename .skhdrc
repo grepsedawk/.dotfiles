@@ -1,9 +1,9 @@
 alt - return : open -a Alacritty
 alt - d : open -a Discord
 alt - s : open -a Slack
-alt - b : open -a Google\ Chrome
+alt - b : open -a Brave\ Browser
 alt - o : open -a Obsidian
-alt - t : open -a Tuple
+alt - r : open -a RuneLite
 
 
 alt + shift - r : brew services restart skhd & brew services restart yabai
