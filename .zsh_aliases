@@ -8,6 +8,8 @@ alias gfr='git fetch origin && git rebase -i origin/main'
 # Install Ruby based on current Ruby version
 alias air='asdf install ruby "`cat .ruby-version`"'
 
+alias rg='rg --hidden --follow --smart-case'
+
 # easy copy pasta
 alias copy='xclip -selection c'
 alias paste='xclip -out -selection c'
@@ -33,3 +35,16 @@ alias emacs='emacs -nw'
 alias a="alias | fzf"
 
 eval $(thefuck --alias qwer)
+
+
+# Crystal aliases
+# this might be a terrible idea
+alias shard=shards
+alias cdoc="crystal docs && open docs/index.html"
+alias cb="crystal build"
+alias cs="crystal spec"
+alias cft="crystal tool format"
+
+function frfr() {
+  find ${3:-.} -type f -not -path '*/\.git/*' -exec sed -i '' -e "s/$1/$2/g" {} \;
+}
