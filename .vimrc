@@ -6,10 +6,10 @@ set spell
 let mapleader = ","
 
 " tabs to 2 spaces
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-filetype plugin indent on
+" set expandtab
+" set shiftwidth=2
+" set softtabstop=2
+" filetype plugin indent on
 
 
 " Add a line at col 80
@@ -84,45 +84,48 @@ let g:ale_fixers = {
       \ 'ruby': ['rubocop'],
       \ 'terraform': ['terraform'],
       \ 'crystal': ['crystal'],
+      \ 'css': ['prettier'],
+      \ 'javascript': ['prettier'],
+      \ 'typescript': ['prettier'],
       \ }
-call plug#begin('~/.vim/plugged')
+" call plug#begin('~/.vim/plugged')
 
-" Fuzzy searching
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" " Fuzzy searching
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
-" Background processes made easy
-Plug 'tpope/vim-dispatch'
+" " Background processes made easy
+" Plug 'tpope/vim-dispatch'
 
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'sheerun/vim-polyglot'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'airblade/vim-gitgutter'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rails'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
-" Themes
-Plug 'blueshirts/darcula'
-Plug 'dracula/vim', { 'as': 'dracula' }
+" " Themes
+" Plug 'blueshirts/darcula'
+" Plug 'dracula/vim', { 'as': 'dracula' }
 
-" Colorize hex color strings
-Plug 'chrisbra/Colorizer'
+" " Colorize hex color strings
+" Plug 'chrisbra/Colorizer'
 
-Plug 'tpope/vim-surround'
-" Plug 'tmhedberg/matchit'
-Plug 'tpope/vim-commentary'
-Plug 'mhinz/vim-mix-format'
+" Plug 'tpope/vim-surround'
+" " Plug 'tmhedberg/matchit'
+" Plug 'tpope/vim-commentary'
+" Plug 'mhinz/vim-mix-format'
 
-" ejs support
-Plug 'nikvdp/ejs-syntax'
+" " ejs support
+" Plug 'nikvdp/ejs-syntax'
 
-" HTML support
-Plug 'mattn/emmet-vim'
-call plug#end()
+" " HTML support
+" Plug 'mattn/emmet-vim'
+" call plug#end()
 
 " Theme
 packadd! dracula_pro
