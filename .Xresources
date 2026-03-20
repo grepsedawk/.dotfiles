@@ -1,5 +1,5 @@
-Xft.dpi: 165.63
-rofi.dpi: 250
+Xft.dpi: 96
+rofi.dpi: 96
 
 ! Fonts
 URxvt.font: xft:Jetbrains Mono:size=11

@@ -3,6 +3,7 @@
 	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
+	autoSetupRemote = true
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f

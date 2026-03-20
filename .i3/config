@@ -2,7 +2,8 @@ set $mod Mod4
 
 # startup
 exec --no-startup-id "bash ~/.i3/battery_monitor.sh"
-exec --no-startup-id ~/.i3/wallpaper.sh
+# WARNING: high CPU!!!
+# exec --no-startup-id ~/.i3/wallpaper.sh
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id redshift
 exec_always --no-startup-id xmodmap ~/.xmodmap
