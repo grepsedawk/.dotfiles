@@ -149,6 +149,22 @@ require("lazy").setup({
       -- server; we layer cmp capabilities on top and enable what we want.
       local caps = require("cmp_nvim_lsp").default_capabilities()
       vim.lsp.config("*", { capabilities = caps })
+
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            hint = {
+              enable     = true,
+              paramName  = "All",
+              paramType  = true,
+              setType    = true,
+              arrayIndex = "Auto",
+              semicolon  = "Disable",
+            },
+          },
+        },
+      })
+
       vim.lsp.enable({ "lua_ls" })
     end,
   },
@@ -314,17 +330,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('<leader>f',  function() vim.lsp.buf.format({ async = true }) end, 'LSP: format')
     map('[d',         vim.diagnostic.goto_prev,   'LSP: prev diagnostic')
     map(']d',         vim.diagnostic.goto_next,   'LSP: next diagnostic')
-
-    -- Inlay hints (nvim 0.10+). Enabled per-buffer on attach; toggle
-    -- with <leader>ih if the ghost text gets noisy.
-    if vim.lsp.inlay_hint then
-      vim.lsp.inlay_hint.enable(true, { bufnr = buf })
-      map('<leader>ih', function()
-        vim.lsp.inlay_hint.enable(
-          not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }),
-          { bufnr = buf }
-        )
-      end, 'LSP: toggle inlay hints')
-    end
   end,
 })
+
+-- Inlay hints (nvim 0.10+) enabled globally, so they show up in every
+-- LSP-attached buffer without hooking into LspAttach. <leader>H toggles
+-- them off/on when the ghost text gets noisy. (Single-char to avoid a
+-- <leader>i prefix that would delay going into insert mode via `,i`.)
+if vim.lsp.inlay_hint then
+  vim.lsp.inlay_hint.enable(true)
+  vim.keymap.set('n', '<leader>H', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  end, { silent = true, desc = 'LSP: toggle inlay hints' })
+end
