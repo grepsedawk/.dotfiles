@@ -34,9 +34,6 @@ alias emacs='emacs -nw'
 
 alias a="alias | fzf"
 
-eval $(thefuck --alias qwer)
-
-
 # Crystal aliases
 # this might be a terrible idea
 alias shard=shards

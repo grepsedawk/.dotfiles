@@ -18,8 +18,8 @@ if [ -f "$HOME/.env" ]; then
     . "$HOME/.env"
 fi
 
-export FZF_CTRL_T_COMMAND="ag -g ''"
-export FZF_DEFAULT_COMMAND="ag -g ''"
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export GTK_THEME=Adwaita:dark
 

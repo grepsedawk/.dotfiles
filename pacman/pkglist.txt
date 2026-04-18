@@ -74,6 +74,7 @@ pulseaudio
 pulseaudio-bluetooth
 redis
 redshift
+ripgrep
 rofi
 rtorrent
 runelite
@@ -82,7 +83,6 @@ scrot
 slack-desktop
 sudo
 texinfo
-the_silver_searcher
 tmate
 tmux
 ttf-jetbrains-mono

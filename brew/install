@@ -11,7 +11,8 @@ fi
 brew update --force # https://github.com/Homebrew/brew/issues/1151
 
 brew bundle --file=- <<EOF
-  brew "the_silver_searcher"
+  brew "ripgrep"
+  brew "fzf"
   brew "neovim"
   brew "tree-sitter-cli"
   brew "zsh"

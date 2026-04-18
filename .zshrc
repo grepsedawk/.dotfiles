@@ -3,7 +3,7 @@ if [ -d /usr/share/oh-my-zsh ]; then
   ZSH=/usr/share/oh-my-zsh
 fi
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE

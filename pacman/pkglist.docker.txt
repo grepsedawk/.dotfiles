@@ -21,9 +21,9 @@ oh-my-zsh-git
 openssh
 patch
 pkgconf
+ripgrep
 sudo
 texinfo
-the_silver_searcher
 tmate
 tmux
 unzip

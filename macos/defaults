@@ -1,0 +1,94 @@
+#!/bin/sh
+# macOS system defaults. Safe to re-run; settings are idempotent.
+# Some changes require a logout or app restart to fully take effect.
+
+set -e
+
+# Close System Settings so it doesn't override what we write
+osascript -e 'tell application "System Settings" to quit' >/dev/null 2>&1 || true
+
+###############################################################################
+# Keyboard
+###############################################################################
+
+# Faster key repeat (lower is faster). 2 = ~30ms, 15 = 225ms initial delay.
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Disable the press-and-hold accent popup so holding a key actually repeats
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Disable the substitutions that mangle code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled    -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled     -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled   -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled       -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled   -bool false
+
+###############################################################################
+# Trackpad
+###############################################################################
+
+# Tap to click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+###############################################################################
+# Screenshots
+###############################################################################
+
+mkdir -p "$HOME/Screenshots"
+defaults write com.apple.screencapture location "$HOME/Screenshots"
+defaults write com.apple.screencapture type "png"
+defaults write com.apple.screencapture disable-shadow -bool true
+
+###############################################################################
+# Finder
+###############################################################################
+
+# Show hidden files and full extensions
+defaults write com.apple.finder       AppleShowAllFiles      -bool true
+defaults write NSGlobalDomain         AppleShowAllExtensions -bool true
+
+# Show path bar and status bar at the bottom
+defaults write com.apple.finder ShowPathbar    -bool true
+defaults write com.apple.finder ShowStatusBar  -bool true
+
+# Default search scope: current folder, not the entire mac
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Don't litter network/USB volumes with .DS_Store
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores     -bool true
+
+###############################################################################
+# Dock
+###############################################################################
+
+# Autohide instantly, no animation delay
+defaults write com.apple.dock autohide               -bool  true
+defaults write com.apple.dock autohide-delay         -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Don't reorder spaces by most-recent use (preserves muscle memory)
+defaults write com.apple.dock mru-spaces -bool false
+
+###############################################################################
+# Accessibility / Motion
+###############################################################################
+
+# Reduce motion (kills the parallax/zoom animations)
+defaults write com.apple.universalaccess reduceMotion       -bool true
+defaults write com.apple.universalaccess reduceTransparency -bool true
+
+###############################################################################
+# Apply
+###############################################################################
+
+# Restart affected apps so changes show up without logging out
+for app in Dock Finder SystemUIServer cfprefsd; do
+  killall "$app" >/dev/null 2>&1 || true
+done
+
+echo "macOS defaults applied. A logout may be needed for keyboard changes."
