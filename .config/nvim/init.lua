@@ -211,8 +211,9 @@ require("lazy").setup({
   "github/copilot.vim",
 }, {
   -- lazy.nvim itself
-  install = { colorscheme = { "dracula_pro_buffy", "habamax" } },
+  install          = { colorscheme = { "dracula_pro_buffy", "habamax" } },
   change_detection = { notify = false },
+  rocks            = { enabled = false }, -- no plugins need luarocks
 })
 
 --------------------------------------------------------------------------------
@@ -272,7 +273,8 @@ inoremap <Right> <nop>
 map <leader>so :source $MYVIMRC<CR>
 map <leader>vi :tabe ~/.config/nvim/init.lua<CR>
 map <leader>vn :tabe notes.md<CR>
-map <leader>r  :!resize<CR><CR>
+map <leader>R  :!resize<CR><CR>
+" (renamed from <leader>r so it doesn't delay <leader>rn LSP-rename)
 map <leader>co mmgg"+yG`m
 map <leader>'  cs"'
 map <leader>"  cs'"
@@ -306,7 +308,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
     map('K',          vim.lsp.buf.hover,          'LSP: hover')
     map('gd',         vim.lsp.buf.definition,     'LSP: go to definition')
-    map('gr',         vim.lsp.buf.references,     'LSP: references')
+    -- gr references lives as the built-in `grr` in nvim 0.11+
     map('<leader>rn', vim.lsp.buf.rename,         'LSP: rename')
     map('<leader>ca', vim.lsp.buf.code_action,    'LSP: code action')
     map('<leader>f',  function() vim.lsp.buf.format({ async = true }) end, 'LSP: format')
