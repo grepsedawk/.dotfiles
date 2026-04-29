@@ -12,9 +12,6 @@ gcc
 git
 git-lfs
 github-cli
-grub
-linux
-linux-firmware
 neovim
 nmap
 oh-my-zsh-git
