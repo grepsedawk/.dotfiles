@@ -22,8 +22,11 @@ yellow = "0xffff80"
 background = "0x22212c"
 foreground = "0xf8f8f2"
 
-[font.normal]
-family = "JetBrainsMono Nerd Font"
+[font]
+normal = { family = "MonoLisa", style = "Medium" }
+bold = { family = "MonoLisa", style = "Bold" }
+italic = { family = "MonoLisa", style = "Medium Italic" }
+bold_italic = { family = "MonoLisa", style = "Bold Italic" }
 
 [selection]
 save_to_clipboard = true

@@ -1,0 +1,172 @@
+set $mod option
+
+# startup
+# exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+# exec --no-startup-id redshift
+# exec_always --no-startup-id xmodmap ~/.xmodmap
+# exec --no-startup-id picom --config ~/.picom.conf
+# exec --no-startup-id dunst
+# exec_always --no-startup-id ~/.i3/tray
+
+# audio keybindings
+# bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +5%"
+# bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%"
+# bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+# bindsym XF86AudioPrev exec notify-send "Media Previous" "$(playerctl previous 2>&1)"
+# bindsym XF86AudioNext exec notify-send "Media Next" "$(playerctl next 2>&1)"
+# bindsym XF86AudioPlay exec notify-send "Media Play/Pause" "$(playerctl play-pause 2>&1)"
+
+# for_window [title="Live Caption"] floating enable
+
+font pango:JetBrainsMono Nerd Font 10
+
+default_border none
+smart_gaps on
+gaps inner 4
+gaps outer 4
+
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
+
+focus_on_window_activation focus
+mouse_follows_focus yes
+
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+bar {
+  position bottom
+  status_command /Users/alex/.config/i3wm-osx/statusline
+  workspace_min_width 25
+
+  tray_padding 1
+  colors {
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
+}
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# ----- app launchers (migrated from ~/.skhdrc) -----
+bindsym $mod+Return       exec open -a Alacritty
+bindsym $mod+b            exec open -a Brave\ Browser
+bindsym $mod+d            exec open -a Discord
+bindsym $mod+s            exec open -a Slack
+bindsym $mod+o            exec open -a Obsidian
+bindsym $mod+control+r    exec open -a RuneLite
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+control+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+# bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r  restart
+# exit i3wmosx
+bindsym $mod+Shift+e exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# lock the screen (macOS — sleeps display, requires password to wake)
+bindsym $mod+control+l exec pmset displaysleepnow
+
+# move workspace between monitors
+bindsym $mod+Tab       exec i3-msg move workspace to output right
+bindsym $mod+Shift+Tab exec i3-msg move workspace to output left
+
+# screenshot to clipboard (interactive selection) — from ~/.skhdrc alt+shift-s
+bindsym $mod+shift+s exec screencapture -ic
+
+# audio device switching — install switchaudio-osx (brew install switchaudio-osx)
+# bindsym $mod+bracketleft  exec SwitchAudioSource -s "Yeti Stereo Microphone"
+# bindsym $mod+bracketright exec SwitchAudioSource -s "MacBook Pro Speakers"
