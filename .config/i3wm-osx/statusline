@@ -33,6 +33,13 @@ block() {
   printf '{"full_text":"%s","color":"%s"}' "$(json_escape "$text")" "$color"
 }
 
+# Pango-markup block: full_text contains <span> tags; the block's own color
+# is irrelevant once markup is set.
+block_pango() {
+  local text=$1
+  printf '{"full_text":"%s","markup":"pango"}' "$(json_escape "$text")"
+}
+
 # --- collectors ---------------------------------------------------------------
 
 block_time() {
@@ -79,11 +86,12 @@ block_wifi() {
   if (( connected )); then
     local icon="📶"
     [[ $kind == hotspot ]] && icon="🔗"
-    if [[ -n $ssid ]]; then
-      block "$icon $ssid" "$C_FG"
-    else
-      block "$icon" "$C_FG"
-    fi
+    local ip
+    ip=$(ipconfig getifaddr "$dev" 2>/dev/null)
+    local label="$icon"
+    [[ -n $ssid ]] && label="$label $ssid"
+    [[ -n $ip ]]   && label="$label ($ip)"
+    block "$label" "$C_FG"
   else
     block "⚠ no wifi" "$C_ALERT"
   fi
@@ -135,6 +143,41 @@ block_volume() {
 
 CLAUDE_CACHE="/tmp/claude/statusline-usage-cache.json"
 CLAUDE_CACHE_TTL=60
+
+# ISO-8601 → epoch. GNU date first, then BSD fallback (macOS).
+iso_to_epoch() {
+  local iso=$1 stripped epoch
+  epoch=$(date -d "$iso" +%s 2>/dev/null)
+  [[ -n $epoch ]] && { printf '%s' "$epoch"; return 0; }
+  stripped=${iso%%.*}
+  stripped=${stripped%%Z}
+  stripped=${stripped%%+*}
+  stripped=${stripped%%-[0-9][0-9]:[0-9][0-9]}
+  if [[ $iso == *Z* || $iso == *+00:00* || $iso == *-00:00* ]]; then
+    epoch=$(env TZ=UTC date -j -f "%Y-%m-%dT%H:%M:%S" "$stripped" +%s 2>/dev/null)
+  else
+    epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$stripped" +%s 2>/dev/null)
+  fi
+  [[ -n $epoch ]] && { printf '%s' "$epoch"; return 0; }
+  return 1
+}
+
+# Style: "time" → 11:19am | "datetime" → may 17, 2:59am
+format_reset_time() {
+  local iso=$1 style=$2 epoch out
+  [[ -z $iso || $iso == null ]] && return 0
+  epoch=$(iso_to_epoch "$iso") || return 0
+  case $style in
+    time)
+      out=$(date -j -r "$epoch" +"%l:%M%p" 2>/dev/null || date -d "@$epoch" +"%l:%M%P" 2>/dev/null)
+      ;;
+    *)
+      out=$(date -j -r "$epoch" +"%b %-d, %l:%M%p" 2>/dev/null || date -d "@$epoch" +"%b %-d, %l:%M%P" 2>/dev/null)
+      ;;
+  esac
+  out=${out#"${out%%[! ]*}"}
+  printf '%s' "$out" | tr '[:upper:]' '[:lower:]' | sed 's/  / /g'
+}
 
 # Resolve OAuth token from env or macOS Keychain. Prints empty on failure.
 claude_oauth_token() {
@@ -197,6 +240,11 @@ block_claude() {
 
   five_pct=$(printf '%s' "$data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
   seven_pct=$(printf '%s' "$data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
+  local five_iso seven_iso five_at seven_at
+  five_iso=$(printf '%s' "$data" | jq -r '.five_hour.resets_at // empty')
+  seven_iso=$(printf '%s' "$data" | jq -r '.seven_day.resets_at // empty')
+  five_at=$(format_reset_time "$five_iso" time)
+  seven_at=$(format_reset_time "$seven_iso" datetime)
   extra_enabled=$(printf '%s' "$data" | jq -r '.extra_usage.is_enabled // false')
 
   local parts=()
@@ -205,7 +253,9 @@ block_claude() {
     parts+=("$(block "\$$extra_used" "$C_FG")")
   fi
   parts+=("$(block "🤖 5h ${five_pct}%" "$(claude_pct_color "$five_pct")")")
+  [[ -n $five_at ]] && parts+=("$(block "@${five_at}" "$C_DIM")")
   parts+=("$(block "7d ${seven_pct}%" "$(claude_pct_color "$seven_pct")")")
+  [[ -n $seven_at ]] && parts+=("$(block "@${seven_at}" "$C_DIM")")
 
   local joined="" first=1 p
   for p in "${parts[@]}"; do
@@ -241,7 +291,7 @@ block_gh() {
   (( n > 0 )) || return 0
   local color=$C_WARN
   (( n >= 5 )) && color=$C_ALERT
-  block " $n" "$color"
+  block "GH 🐙 $n" "$color"
 }
 
 emit() {

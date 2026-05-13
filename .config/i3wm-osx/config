@@ -43,6 +43,7 @@ client.background       #F8F8F2
 bar {
   position bottom
   status_command /Users/alex/.config/i3wm-osx/statusline
+  font pango:MonoLisa 20
   workspace_min_width 25
 
   tray_padding 1
@@ -64,7 +65,7 @@ floating_modifier $mod
 
 # ----- app launchers (migrated from ~/.skhdrc) -----
 bindsym $mod+Return       exec open -a Alacritty
-bindsym $mod+b            exec open -a Brave\ Browser
+bindsym $mod+b            exec open -a Zen --env MOZ_DISABLE_SAFE_MODE_KEY=1
 bindsym $mod+d            exec open -a Discord
 bindsym $mod+s            exec open -a Slack
 bindsym $mod+o            exec open -a Obsidian
