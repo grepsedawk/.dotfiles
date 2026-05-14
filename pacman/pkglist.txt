@@ -1,7 +1,7 @@
 acpi
 act
 alacritty
-asdf-vm
+mise
 autoconf
 automake
 awesome-terminal-fonts

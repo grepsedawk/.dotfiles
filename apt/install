@@ -22,6 +22,6 @@ $SCRIPT_DIR/zsh/install.sh
 $SCRIPT_DIR/docker/install
 $SCRIPT_DIR/redis/install.sh
 $SCRIPT_DIR/thefuck/install.sh
-$SCRIPT_DIR/asdf/install
+$SCRIPT_DIR/mise/install
 $SCRIPT_DIR/postgresql/install.sh
 $SCRIPT_DIR/maria-db/install.sh

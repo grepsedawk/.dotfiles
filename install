@@ -6,12 +6,12 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 if command -v apt > /dev/null && [ -f /etc/lsb-release ]; then
   "$SCRIPT_DIR"/apt/install
-  . $HOME/.asdf/asdf.sh
+  eval "$(mise activate bash)"
 fi
 
 if command -v pacman; then
   "$SCRIPT_DIR"/pacman/install "$@"
-  . /opt/asdf-vm/asdf.sh
+  eval "$(mise activate bash)"
 fi
 
 if [[ $OSTYPE == 'darwin'* ]]; then

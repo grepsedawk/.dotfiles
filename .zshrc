@@ -20,10 +20,14 @@ DISABLE_UPDATE_PROMPT="true"
 
 # Plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git github rails bundler terraform tmux tmuxinator docker asdf docker-compose \
+plugins=(git github rails bundler terraform tmux tmuxinator docker docker-compose \
          ssh-agent heroku aws gh fzf zsh-autosuggestions brew)
 
 source $ZSH/oh-my-zsh.sh
+
+if command -v mise > /dev/null; then
+  eval "$(mise activate zsh)"
+fi
 
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 

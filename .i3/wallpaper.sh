@@ -4,7 +4,7 @@ hsetroot -solid "#22212c"
 
 set -e
 
-. /opt/asdf-vm/asdf.sh
+eval "$(mise activate bash)"
 
 WALLPAPERS="$HOME"/.i3/wallpaper/
 TIME=1m

@@ -6,7 +6,7 @@ alias gfc='git fetch origin && git checkout origin/main'
 alias gfr='git fetch origin && git rebase -i origin/main'
 
 # Install Ruby based on current Ruby version
-alias air='asdf install ruby "`cat .ruby-version`"'
+alias air='mise install ruby@"`cat .ruby-version`"'
 
 alias rg='rg --hidden --follow --smart-case'
 
