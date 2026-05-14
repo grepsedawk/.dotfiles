@@ -1,15 +1,13 @@
 #! /usr/bin/env bash
 
-if [ ! -d ~/.asdf ]; then
-  git clone git@github.com:asdf-vm/asdf.git ~/.asdf --branch v0.3.0 || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.3.0
+set -e
+
+if ! command -v mise > /dev/null; then
+  curl https://mise.run | sh
 fi
 
-. $HOME/.asdf/asdf.sh
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(mise activate bash)"
 
-asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-
-latest_ruby=$(asdf list-all ruby | ag "^[2-9].[0-9].[0-9]$" | tail -1)
-
-asdf install ruby $latest_ruby
-asdf global ruby $latest_ruby
+mise use --global ruby@latest
+mise use --global node@latest
