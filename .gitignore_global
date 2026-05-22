@@ -16,3 +16,4 @@ production.sql
 .DS_Store
 
 .claude/worktrees
+.claude/scheduled_tasks.lock
