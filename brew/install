@@ -35,6 +35,11 @@ brew bundle --file=- <<EOF
   brew "lucky"
   brew "yarn"
   brew "mise"
+
+  brew "colima"
+  brew "docker"
+  brew "docker-compose"
+  brew "docker-credential-helper"
 EOF
 
 
