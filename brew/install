@@ -26,6 +26,7 @@ brew bundle --file=- <<EOF
   cask "zen"
 
   brew "gh"
+  brew "codex"
 
   brew "postgres", restart_service: :changed
   brew "redis", restart_service: :changed
