@@ -62,11 +62,6 @@ if ! tailscale status >/dev/null 2>&1; then
   sudo tailscale up
 fi
 
-if ! colima status >/dev/null 2>&1; then
-  echo "==> Starting colima"
-  colima start
-fi
-
 brew services start i3wm-osx 2>/dev/null || true
 
 cat <<'EOF'
@@ -75,6 +70,7 @@ cat <<'EOF'
   - Copy ~/.ssh/ and ~/Library/Fonts/MonoLisa* from the old machine
   - Sign in: Bitwarden, Codex (codex login), Claude, Slack, Notion
   - App Store: install anything you want from there
+  - Run `colima start` when you need Docker (first boot pulls a VM image)
   - Grant i3wm-osx Accessibility + Input Monitoring:
       System Settings → Privacy & Security → Accessibility/Input Monitoring → +
       → /opt/homebrew/opt/i3wm-osx/i3wm-osx.app
