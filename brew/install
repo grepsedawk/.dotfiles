@@ -12,6 +12,7 @@ brew bundle --file=- <<EOF
   brew "ripgrep"
   brew "fzf"
   brew "neovim"
+  brew "tree-sitter-cli" # nvim-treesitter main branch compiles parsers via this CLI
   brew "zsh"
   brew "tmux"
   brew "jq"
