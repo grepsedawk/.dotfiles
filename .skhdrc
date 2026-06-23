@@ -1,4 +1,4 @@
-alt - return : open -a Alacritty
+alt - return : open -a Ghostty
 alt - d : open -a Discord
 alt - s : open -a Slack
 alt - b : open -a Brave\ Browser

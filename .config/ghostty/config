@@ -1,0 +1,29 @@
+font-family = MonoLisa
+font-style = Medium
+font-style-bold = Bold
+font-style-italic = Medium Italic
+font-style-bold-italic = Bold Italic
+
+background = 22212c
+foreground = f8f8f2
+
+palette = 0=#454158
+palette = 1=#ff9580
+palette = 2=#8aff80
+palette = 3=#ffff80
+palette = 4=#9580ff
+palette = 5=#ff80bf
+palette = 6=#80ffea
+palette = 7=#f8f8f2
+palette = 8=#504c67
+palette = 9=#ffaa99
+palette = 10=#a2ff99
+palette = 11=#ffff99
+palette = 12=#aa99ff
+palette = 13=#ff99cc
+palette = 14=#99ffee
+palette = 15=#ffffff
+
+background-opacity = 0.98
+macos-titlebar-style = hidden
+copy-on-select = clipboard

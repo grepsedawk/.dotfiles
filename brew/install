@@ -19,7 +19,7 @@ brew bundle --file=- <<EOF
   brew "wget"
   brew "mosh"
   brew "git-lfs"
-  cask "alacritty"
+  cask "ghostty"
 
   cask "discord"
   cask "zen"

@@ -1,6 +1,6 @@
 acpi
 act
-alacritty
+ghostty
 mise
 autoconf
 automake

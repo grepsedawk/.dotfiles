@@ -64,7 +64,7 @@ bar {
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec ghostty
 
 # start a browser
 bindsym $mod+b exec google-chrome-stable
