@@ -5,7 +5,7 @@ This is a configuration/dotfile repository for me to fast track rebuilding my de
 ## Usage
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/grepsedawk/.dotfiles/main/install | bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/grepsedawk/.dotfiles/main/install)"
 ```
 
 ## "Try it before you buy it"

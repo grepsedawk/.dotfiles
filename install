@@ -1,21 +1,58 @@
-#!/usr/bin/env bash
+#!/bin/sh
+# Fresh Mac:
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/grepsedawk/.dotfiles/main/install)"
 
 set -e
 
-SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+DOTFILES="$HOME/.dotfiles"
 
-if command -v apt > /dev/null && [ -f /etc/lsb-release ]; then
-  "$SCRIPT_DIR"/apt/install
+if [[ $OSTYPE == 'darwin'* ]] || [ "$(uname -s)" = "Darwin" ]; then
+  if ! xcode-select -p >/dev/null 2>&1; then
+    echo "==> Installing Xcode Command Line Tools (click Install in the popup)"
+    xcode-select --install || true
+    until xcode-select -p >/dev/null 2>&1; do sleep 5; done
+  fi
+
+  # Pick up an existing install before deciding whether to re-run the
+  # installer — PATH from a non-interactive shell may not have /opt/homebrew.
+  [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+  if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+
+  command -v gh >/dev/null 2>&1 || brew install gh
+
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
+  ssh-keyscan -t rsa,ed25519 github.com 2>/dev/null >> "$HOME/.ssh/known_hosts"
+
+  # Force the gh ssh-key generation flow when no local key exists — a
+  # prior token-only login passes `gh auth status` but never created one.
+  if ! gh auth status >/dev/null 2>&1 \
+     || { [ ! -f "$HOME/.ssh/id_ed25519" ] && [ ! -f "$HOME/.ssh/id_rsa" ]; }; then
+    gh auth logout --hostname github.com 2>/dev/null || true
+    gh auth login --git-protocol ssh --web
+  fi
+
+  if [ ! -d "$DOTFILES" ]; then
+    git clone git@github.com:grepsedawk/.dotfiles.git "$DOTFILES"
+  else
+    git -C "$DOTFILES" pull --ff-only
+  fi
+
+  "$DOTFILES"/brew/install
+fi
+
+if command -v apt >/dev/null && [ -f /etc/lsb-release ]; then
+  "$DOTFILES"/apt/install
   eval "$(mise activate bash)"
 fi
 
-if command -v pacman; then
-  "$SCRIPT_DIR"/pacman/install "$@"
+if command -v pacman >/dev/null; then
+  "$DOTFILES"/pacman/install "$@"
   eval "$(mise activate bash)"
 fi
 
-if [[ $OSTYPE == 'darwin'* ]]; then
-  "$SCRIPT_DIR"/brew/install
-fi
-
-$SCRIPT_DIR/link-dotfiles.rb
+"$DOTFILES"/link-dotfiles.rb

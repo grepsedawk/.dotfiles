@@ -1,64 +1,81 @@
 #!/bin/sh
-# TODO: map caps lock to ctrl
-# TODO: reduce motion blur
-# TODO: keybinds for mission control pane 1234 -> option+1234
 
-if ! command -v brew > /dev/null; then
-  /bin/bash -c \
-    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-fi
+set -e
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "$0" )" &> /dev/null && pwd )"
 
 brew update --force # https://github.com/Homebrew/brew/issues/1151
+
+brew trust --formula grepsedawk/tap/i3wm-osx || true
 
 brew bundle --file=- <<EOF
   brew "ripgrep"
   brew "fzf"
   brew "neovim"
-  brew "tree-sitter-cli"
   brew "zsh"
   brew "tmux"
+  brew "jq"
+  brew "wget"
+  brew "mosh"
+  brew "git-lfs"
   cask "alacritty"
-
-  brew "koekeishiya/formulae/skhd"
-  brew "koekeishiya/formulae/yabai"
 
   cask "discord"
   cask "zen"
 
   brew "gh"
-  brew "codex"
+  cask "codex"
+  brew "tailscale"
 
-  brew "postgres", restart_service: :changed
-  brew "redis", restart_service: :changed
-
-  brew "crystal"
-  tap "luckyframework/homebrew-lucky"
-  brew "lucky"
-  brew "yarn"
   brew "mise"
 
   brew "colima"
   brew "docker"
   brew "docker-compose"
   brew "docker-credential-helper"
+
+  tap "grepsedawk/tap"
+  brew "i3wm-osx"
 EOF
 
+"$SCRIPT_DIR"/../macos/defaults
 
 if [ ! -d ~/.oh-my-zsh ]; then
-  git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+  git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+fi
+
+# Make brew's zsh the login shell.
+BREW_ZSH="$(brew --prefix)/bin/zsh"
+if [ -x "$BREW_ZSH" ] && [ "$SHELL" != "$BREW_ZSH" ]; then
+  grep -qx "$BREW_ZSH" /etc/shells || echo "$BREW_ZSH" | sudo tee -a /etc/shells >/dev/null
+  chsh -s "$BREW_ZSH"
 fi
 
 eval "$(mise activate bash)"
 
-install_mise_language() {
-  local language="$1"
-  mise use --global "$language@latest"
-}
+mise use --global node@latest
 
-install_mise_language "ruby"
-eval "$(mise activate bash)"
-gem update --system
-number_of_cores=$(sysctl -n hw.ncpu)
-bundle config --global jobs $((number_of_cores - 1))
+if ! tailscale status >/dev/null 2>&1; then
+  echo "==> Starting tailscaled (requires sudo)"
+  sudo brew services start tailscale
+  sudo tailscale up
+fi
 
-install_mise_language "node"
+if ! colima status >/dev/null 2>&1; then
+  echo "==> Starting colima"
+  colima start
+fi
+
+brew services start i3wm-osx 2>/dev/null || true
+
+cat <<'EOF'
+
+==> Done. Remaining manual steps:
+  - Copy ~/.ssh/ and ~/Library/Fonts/MonoLisa* from the old machine
+  - Sign in: Bitwarden, Codex (codex login), Claude, Slack, Notion
+  - App Store: install anything you want from there
+  - Grant i3wm-osx Accessibility + Input Monitoring:
+      System Settings → Privacy & Security → Accessibility/Input Monitoring → +
+      → /opt/homebrew/opt/i3wm-osx/i3wm-osx.app
+  - Log out + back in so keyboard remap, hotkeys, and dark mode fully apply
+EOF
