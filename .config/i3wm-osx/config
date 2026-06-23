@@ -18,7 +18,7 @@ set $mod option
 
 # for_window [title="Live Caption"] floating enable
 
-font pango:JetBrainsMono Nerd Font 10
+font pango:MonoLisaNormal-Medium 8
 
 default_border none
 smart_gaps on
@@ -42,8 +42,8 @@ client.background       #F8F8F2
 
 bar {
   position bottom
-  status_command /Users/alex/.config/i3wm-osx/statusline
-  font pango:MonoLisa 20
+  status_command ~/.config/i3wm-osx/statusline
+  font pango:MonoLisaNormal-Medium 14
   workspace_min_width 25
 
   tray_padding 1
