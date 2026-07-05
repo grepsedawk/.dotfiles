@@ -16,6 +16,7 @@ brew bundle --file=- <<EOF
   brew "zsh"
   brew "tmux"
   brew "jq"
+  brew "rtk"
   brew "wget"
   brew "mosh"
   brew "git-lfs"
