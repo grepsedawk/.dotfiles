@@ -27,6 +27,7 @@ brew bundle --file=- <<EOF
 
   brew "gh"
   cask "codex"
+  brew "opencode"
   brew "tailscale"
 
   brew "mise"
