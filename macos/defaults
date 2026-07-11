@@ -17,6 +17,14 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled  -bool false
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled      -bool false
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled  -bool false
 
+# Free Ctrl+arrow for the WM: disable Spaces + Mission Control hotkeys.
+# 79/81 move left/right a space, 80/82 their shift variants, 32 Mission
+# Control (Ctrl+Up), 36 Application windows (Ctrl+Down).
+for id in 79 80 81 82 32 36; do
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$id" \
+    '<dict><key>enabled</key><false/></dict>'
+done
+
 # Tab cycles through every control in dialogs, not just text fields.
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
