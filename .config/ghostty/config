@@ -27,3 +27,7 @@ palette = 15=#ffffff
 background-opacity = 0.98
 macos-titlebar-style = hidden
 copy-on-select = clipboard
+
+# Ctrl+Backspace defaults to 0x08 (Ctrl+H), which tmux reads as pane-left
+# nav. Send delete-word instead so backspace stops jumping panes.
+keybind = ctrl+backspace=text:\x17
