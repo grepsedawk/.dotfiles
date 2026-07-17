@@ -141,12 +141,17 @@ block_volume() {
   fi
 }
 
-CLAUDE_CACHE="/tmp/claude/statusline-usage-cache.json"
-CLAUDE_CACHE_TTL=60
+CODEX_CACHE="/tmp/codex/statusline-usage-cache.json"
+CODEX_CACHE_TTL=60
+CODEX_USAGE_URL="${CODEX_USAGE_URL:-https://chatgpt.com/backend-api/wham/usage}"
 
-# ISO-8601 → epoch. GNU date first, then BSD fallback (macOS).
+# ISO-8601 or Unix timestamp to epoch. GNU date first, then BSD fallback.
 iso_to_epoch() {
   local iso=$1 stripped epoch
+  if [[ $iso =~ ^[0-9]+$ ]]; then
+    printf '%s' "$iso"
+    return 0
+  fi
   epoch=$(date -d "$iso" +%s 2>/dev/null)
   [[ -n $epoch ]] && { printf '%s' "$epoch"; return 0; }
   stripped=${iso%%.*}
@@ -179,38 +184,49 @@ format_reset_time() {
   printf '%s' "$out" | tr '[:upper:]' '[:lower:]' | sed 's/  / /g'
 }
 
-# Resolve OAuth token from env or macOS Keychain. Prints empty on failure.
-claude_oauth_token() {
-  if [[ -n ${CLAUDE_CODE_OAUTH_TOKEN:-} ]]; then
-    printf '%s' "$CLAUDE_CODE_OAUTH_TOKEN"
+# Resolve the Codex access token from the environment or auth.json.
+codex_access_token() {
+  if [[ -n ${CODEX_ACCESS_TOKEN:-} ]]; then
+    printf '%s' "$CODEX_ACCESS_TOKEN"
     return 0
   fi
-  command -v security >/dev/null 2>&1 || return 0
   (( HAVE_JQ )) || return 0
-  local blob token
-  blob=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null) || return 0
-  [[ -z $blob ]] && return 0
-  token=$(printf '%s' "$blob" | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null)
-  [[ -n $token && $token != "null" ]] && printf '%s' "$token"
+  local auth_file="${CODEX_HOME:-$HOME/.codex}/auth.json"
+  [[ -r $auth_file ]] || return 0
+  jq -r '.tokens.access_token // empty' "$auth_file" 2>/dev/null
 }
 
-claude_refresh() {
-  local token response
-  token=$(claude_oauth_token)
+codex_account_id() {
+  if [[ -n ${CODEX_ACCOUNT_ID:-} ]]; then
+    printf '%s' "$CODEX_ACCOUNT_ID"
+    return 0
+  fi
+  (( HAVE_JQ )) || return 0
+  local auth_file="${CODEX_HOME:-$HOME/.codex}/auth.json"
+  [[ -r $auth_file ]] || return 0
+  jq -r '.tokens.account_id // empty' "$auth_file" 2>/dev/null
+}
+
+codex_refresh() {
+  local token account response tmp
+  token=$(codex_access_token)
   [[ -z $token ]] && return 0
-  response=$(curl -s --max-time 8 \
-    -H "Accept: application/json" \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $token" \
-    -H "anthropic-beta: oauth-2025-04-20" \
-    -H "User-Agent: i3wm-osx-statusline/1.0" \
-    "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
+  account=$(codex_account_id)
+  local headers=(
+    -H "Accept: application/json"
+    -H "Authorization: Bearer $token"
+    -H "User-Agent: i3wm-osx-statusline/1.0"
+  )
+  [[ -n $account ]] && headers+=(-H "ChatGPT-Account-Id: $account")
+  response=$(curl -fsS --max-time 8 "${headers[@]}" "$CODEX_USAGE_URL" 2>/dev/null)
   [[ -z $response ]] && return 0
-  printf '%s' "$response" | jq -e '.five_hour' >/dev/null 2>&1 || return 0
-  printf '%s' "$response" >"$CLAUDE_CACHE.tmp" && mv "$CLAUDE_CACHE.tmp" "$CLAUDE_CACHE"
+  printf '%s' "$response" | jq -e '.rate_limit.primary_window' >/dev/null 2>&1 || return 0
+  mkdir -p "${CODEX_CACHE%/*}"
+  tmp="$CODEX_CACHE.tmp.$$"
+  printf '%s' "$response" >"$tmp" && mv "$tmp" "$CODEX_CACHE"
 }
 
-claude_pct_color() {
+codex_pct_color() {
   local pct=$1
   if   (( pct >= 90 )); then printf '%s' "$C_ALERT"
   elif (( pct >= 70 )); then printf '%s' "$C_WARN"
@@ -218,44 +234,55 @@ claude_pct_color() {
   fi
 }
 
-block_claude() {
+codex_window_label() {
+  local seconds=$1
+  if (( seconds % 604800 == 0 )); then
+    printf '%dd' "$(( seconds / 86400 ))"
+  elif (( seconds % 3600 == 0 )); then
+    printf '%dh' "$(( seconds / 3600 ))"
+  else
+    printf '%dm' "$(( seconds / 60 ))"
+  fi
+}
+
+block_codex() {
   (( HAVE_JQ )) || return 0
   local now mtime age
   now=$(date +%s)
-  if [[ -f $CLAUDE_CACHE ]]; then
-    mtime=$(stat -f %m "$CLAUDE_CACHE" 2>/dev/null || echo 0)
+  if [[ -f $CODEX_CACHE ]]; then
+    mtime=$(stat -f %m "$CODEX_CACHE" 2>/dev/null || echo 0)
     age=$(( now - mtime ))
   else
     age=999999
   fi
-  if (( age > CLAUDE_CACHE_TTL )); then
-    ( claude_refresh ) &
+  if (( age > CODEX_CACHE_TTL )); then
+    ( codex_refresh ) &
     disown 2>/dev/null || true
   fi
-  [[ -f $CLAUDE_CACHE ]] || return 0
+  [[ -f $CODEX_CACHE ]] || return 0
 
-  local data five_pct seven_pct extra_enabled extra_used
-  data=$(<"$CLAUDE_CACHE")
-  printf '%s' "$data" | jq -e '.five_hour' >/dev/null 2>&1 || return 0
-
-  five_pct=$(printf '%s' "$data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
-  seven_pct=$(printf '%s' "$data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
-  local five_iso seven_iso five_at seven_at
-  five_iso=$(printf '%s' "$data" | jq -r '.five_hour.resets_at // empty')
-  seven_iso=$(printf '%s' "$data" | jq -r '.seven_day.resets_at // empty')
-  five_at=$(format_reset_time "$five_iso" time)
-  seven_at=$(format_reset_time "$seven_iso" datetime)
-  extra_enabled=$(printf '%s' "$data" | jq -r '.extra_usage.is_enabled // false')
+  local data
+  data=$(<"$CODEX_CACHE")
+  printf '%s' "$data" | jq -e '.rate_limit.primary_window' >/dev/null 2>&1 || return 0
 
   local parts=()
-  if [[ $extra_enabled == "true" ]]; then
-    extra_used=$(printf '%s' "$data" | jq -r '(.extra_usage.used_credits // 0) / 100' | awk '{printf "%.2f", $1}')
-    parts+=("$(block "\$$extra_used" "$C_FG")")
-  fi
-  parts+=("$(block "🤖 5h ${five_pct}%" "$(claude_pct_color "$five_pct")")")
-  [[ -n $five_at ]] && parts+=("$(block "@${five_at}" "$C_DIM")")
-  parts+=("$(block "7d ${seven_pct}%" "$(claude_pct_color "$seven_pct")")")
-  [[ -n $seven_at ]] && parts+=("$(block "@${seven_at}" "$C_DIM")")
+  local name seconds pct reset_at label reset style
+  while IFS=$'\t' read -r name seconds pct reset_at; do
+    [[ -n $name && $seconds =~ ^[0-9]+$ && $pct =~ ^[0-9]+$ ]] || continue
+    label=$(codex_window_label "$seconds")
+    parts+=("$(block "${name}${label} ${pct}%" "$(codex_pct_color "$pct")")")
+    style=datetime
+    (( seconds <= 86400 )) && style=time
+    reset=$(format_reset_time "$reset_at" "$style")
+    [[ -n $reset ]] && parts+=("$(block "@${reset}" "$C_DIM")")
+  done < <(printf '%s' "$data" | jq -r '
+    def windows($name; $limit):
+      [$limit.primary_window, $limit.secondary_window][]
+      | select(. != null)
+      | [$name, (.limit_window_seconds // 0), (.used_percent // 0 | round), (.reset_at // 0)]
+      | @tsv;
+    windows("✨"; .rate_limit)
+  ')
 
   local joined="" first=1 p
   for p in "${parts[@]}"; do
@@ -300,7 +327,7 @@ emit() {
   local parts=()
   local b
   b=$(block_gh);       [[ -n $b ]] && parts+=("$b")
-  b=$(block_claude);   [[ -n $b ]] && parts+=("$b")
+  b=$(block_codex);    [[ -n $b ]] && parts+=("$b")
   b=$(block_volume);   [[ -n $b ]] && parts+=("$b")
   b=$(block_mem);      [[ -n $b ]] && parts+=("$b")
   b=$(block_load);     [[ -n $b ]] && parts+=("$b")
