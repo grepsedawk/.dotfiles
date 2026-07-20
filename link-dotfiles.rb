@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
+
 class String
   def red
     color(31)
@@ -21,11 +23,13 @@ class Dotfile
   IGNORED_DOTFILES = %w[. .. .git .github .circleci .gitignore].freeze
   NESTED_LINKS = %w[.config].freeze
 
-  def initialize(filename)
+  def initialize(filename, home: ENV.fetch('HOME'), dotfiles_path: nil)
     @filename = filename
+    @home = home
+    @dotfiles_path = dotfiles_path || File.join(home, '.dotfiles')
   end
 
-  def self.link_path!(path)
+  def self.link_path!(path, home: ENV.fetch('HOME'))
     Dir.glob(File.join(path, '.*'))
        .map { |file| File.basename(file) }
        .map do |file|
@@ -38,7 +42,7 @@ class Dotfile
        end
        .flatten
        .reject { |f| IGNORED_DOTFILES.include?(f) }
-       .map { |f| new(f) }
+       .map { |f| new(f, home: home, dotfiles_path: path) }
        .each(&:link!)
   end
 
@@ -51,24 +55,37 @@ class Dotfile
 
     print "#{full_path} -> "
 
-    if File.exist? link_path
-      puts File.symlink?(link_path) ? 'Already linked'.green : 'File Exists (Delete and re-run)'.red
+    if File.symlink?(link_path)
+      message = linked_to_full_path? ? 'Already linked'.green : 'Wrong Link (Delete and re-run)'.red
+      puts message
 
       return false
     end
 
+    if File.exist? link_path
+      puts 'File Exists (Delete and re-run)'.red
+
+      return false
+    end
+
+    FileUtils.mkdir_p(File.dirname(link_path))
     File.symlink(full_path, link_path)
 
     puts 'Linked!'.green
   end
 
   def full_path
-    "#{ENV['HOME']}/.dotfiles/#{filename}"
+    File.join(@dotfiles_path, filename)
   end
 
   def link_path
-    "#{ENV['HOME']}/#{filename}"
+    File.join(@home, filename)
+  end
+
+  def linked_to_full_path?
+    target = File.expand_path(File.readlink(link_path), File.dirname(link_path))
+    target == File.expand_path(full_path)
   end
 end
 
-Dotfile.link_path!("#{ENV['HOME']}/.dotfiles/")
+Dotfile.link_path!(File.join(ENV.fetch('HOME'), '.dotfiles')) if $PROGRAM_NAME == __FILE__
