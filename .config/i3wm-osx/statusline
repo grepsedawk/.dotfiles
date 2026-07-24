@@ -33,13 +33,6 @@ block() {
   printf '{"full_text":"%s","color":"%s"}' "$(json_escape "$text")" "$color"
 }
 
-# Pango-markup block: full_text contains <span> tags; the block's own color
-# is irrelevant once markup is set.
-block_pango() {
-  local text=$1
-  printf '{"full_text":"%s","markup":"pango"}' "$(json_escape "$text")"
-}
-
 # --- collectors ---------------------------------------------------------------
 
 block_time() {
@@ -245,6 +238,53 @@ codex_window_label() {
   fi
 }
 
+codex_weekly_delta() {
+  local pct=$1 seconds=$2 reset_at=$3 now=${4:-$(date +%s)}
+  [[ $pct =~ ^[0-9]+$ && $seconds == 604800 && $now =~ ^[0-9]+$ ]] || return 1
+
+  local reset_epoch start_epoch day target delta
+  reset_epoch=$(iso_to_epoch "$reset_at") || return 1
+  start_epoch=$(( reset_epoch - seconds ))
+  (( now >= start_epoch && now < reset_epoch )) || return 1
+
+  day=$(( (now - start_epoch) / 86400 + 1 ))
+  target=$(( (100 * day + 3) / 7 ))
+  delta=$(( pct - target ))
+
+  if (( delta > 0 )); then
+    printf '+%d' "$delta"
+  else
+    printf '%d' "$delta"
+  fi
+}
+
+codex_delta_color() {
+  local delta=$1
+  if [[ $delta == +* ]]; then
+    printf '%s' "$C_ALERT"
+  elif [[ $delta == -* ]]; then
+    printf '%s' "$C_OK"
+  else
+    printf '%s' "$C_FG"
+  fi
+}
+
+codex_usage_block() {
+  local name=$1 seconds=$2 pct=$3 reset_at=$4 now=$5
+  local label usage_color delta delta_color
+  label=$(codex_window_label "$seconds")
+  usage_color=$(codex_pct_color "$pct")
+
+  if delta=$(codex_weekly_delta "$pct" "$seconds" "$reset_at" "$now"); then
+    delta_color=$(codex_delta_color "$delta")
+    printf '%s,%s' \
+      "$(block "${name}${label} ${pct}%" "$usage_color")" \
+      "$(block "${delta}%" "$delta_color")"
+  else
+    block "${name}${label} ${pct}%" "$usage_color"
+  fi
+}
+
 block_codex() {
   (( HAVE_JQ )) || return 0
   local now mtime age
@@ -266,13 +306,12 @@ block_codex() {
   printf '%s' "$data" | jq -e '.rate_limit.primary_window' >/dev/null 2>&1 || return 0
 
   local parts=()
-  local name seconds pct reset_at label reset style
+  local name seconds pct reset_at reset style
   while IFS=$'\t' read -r name seconds pct reset_at; do
     [[ -n $name && $seconds =~ ^[0-9]+$ && $pct =~ ^[0-9]+$ ]] || continue
-    label=$(codex_window_label "$seconds")
-    parts+=("$(block "${name}${label} ${pct}%" "$(codex_pct_color "$pct")")")
+    parts+=("$(codex_usage_block "$name" "$seconds" "$pct" "$reset_at" "$now")")
     style=datetime
-    (( seconds <= 86400 )) && style=time
+    (( seconds <= 86400 )) && style="time"
     reset=$(format_reset_time "$reset_at" "$style")
     [[ -n $reset ]] && parts+=("$(block "@${reset}" "$C_DIM")")
   done < <(printf '%s' "$data" | jq -r '
