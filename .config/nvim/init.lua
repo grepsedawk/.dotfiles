@@ -13,6 +13,7 @@ vim.opt.number         = true
 vim.opt.relativenumber = true
 vim.opt.autoread       = true
 vim.opt.termguicolors  = true
+vim.opt.foldenable     = false
 
 -- search
 vim.opt.incsearch  = true

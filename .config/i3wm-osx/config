@@ -65,6 +65,7 @@ floating_modifier $mod
 
 # ----- app launchers (migrated from ~/.skhdrc) -----
 bindsym $mod+Return       exec open -a Ghostty
+bindsym $mod+c            exec open -a ChatGPT
 bindsym $mod+b            exec open -a Zen --env MOZ_DISABLE_SAFE_MODE_KEY=1
 bindsym $mod+d            exec open -a Discord
 bindsym $mod+s            exec open -a Slack

@@ -24,7 +24,7 @@ palette = 13=#ff99cc
 palette = 14=#99ffee
 palette = 15=#ffffff
 
-background-opacity = 0.98
+background-opacity = 0.95
 macos-titlebar-style = hidden
 copy-on-select = clipboard
 
