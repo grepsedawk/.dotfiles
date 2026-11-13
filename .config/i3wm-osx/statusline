@@ -1,7 +1,6 @@
 #!/bin/bash
 # i3wm-osx status line — emits i3status JSON protocol.
-# Each cycle prints one JSON array of blocks. Bar fills right-to-left,
-# so blocks at the end of the array appear leftmost.
+# Each cycle prints one JSON array of blocks, rendered left to right.
 
 set -u
 
@@ -31,6 +30,13 @@ json_escape() {
 block() {
   local text=$1 color=${2:-$C_FG}
   printf '{"full_text":"%s","color":"%s"}' "$(json_escape "$text")" "$color"
+}
+
+# A block followed by a gap of the given width instead of a separator.
+attached_block() {
+  local text=$1 color=$2 gap=$3
+  printf '{"full_text":"%s","color":"%s","separator":false,"separator_block_width":%d}' \
+    "$(json_escape "$text")" "$color" "$gap"
 }
 
 # --- collectors ---------------------------------------------------------------
@@ -160,21 +166,14 @@ iso_to_epoch() {
   return 1
 }
 
-# Style: "time" → 11:19am | "datetime" → may 17, 2:59am
-format_reset_time() {
-  local iso=$1 style=$2 epoch out
-  [[ -z $iso || $iso == null ]] && return 0
-  epoch=$(iso_to_epoch "$iso") || return 0
-  case $style in
-    time)
-      out=$(date -j -r "$epoch" +"%l:%M%p" 2>/dev/null || date -d "@$epoch" +"%l:%M%P" 2>/dev/null)
-      ;;
-    *)
-      out=$(date -j -r "$epoch" +"%b %-d, %l:%M%p" 2>/dev/null || date -d "@$epoch" +"%b %-d, %l:%M%P" 2>/dev/null)
-      ;;
-  esac
-  out=${out#"${out%%[! ]*}"}
-  printf '%s' "$out" | tr '[:upper:]' '[:lower:]' | sed 's/  / /g'
+# Time until reset as DD:HH:MM.
+format_countdown() {
+  local reset_at=$1 now=$2 epoch left
+  [[ -z $reset_at || $reset_at == null ]] && return 0
+  epoch=$(iso_to_epoch "$reset_at") || return 0
+  left=$(( epoch - now ))
+  (( left < 0 )) && left=0
+  printf '%02d:%02d:%02d' "$(( left / 86400 ))" "$(( left % 86400 / 3600 ))" "$(( left % 3600 / 60 ))"
 }
 
 # Resolve the Codex access token from the environment or auth.json.
@@ -219,7 +218,7 @@ codex_refresh() {
   printf '%s' "$response" >"$tmp" && mv "$tmp" "$CODEX_CACHE"
 }
 
-codex_pct_color() {
+usage_pct_color() {
   local pct=$1
   if   (( pct >= 90 )); then printf '%s' "$C_ALERT"
   elif (( pct >= 70 )); then printf '%s' "$C_WARN"
@@ -227,7 +226,7 @@ codex_pct_color() {
   fi
 }
 
-codex_window_label() {
+usage_window_label() {
   local seconds=$1
   if (( seconds % 604800 == 0 )); then
     printf '%dd' "$(( seconds / 86400 ))"
@@ -238,7 +237,7 @@ codex_window_label() {
   fi
 }
 
-codex_weekly_delta() {
+usage_weekly_delta() {
   local pct=$1 seconds=$2 reset_at=$3 now=${4:-$(date +%s)}
   [[ $pct =~ ^[0-9]+$ && $seconds == 604800 && $now =~ ^[0-9]+$ ]] || return 1
 
@@ -258,7 +257,7 @@ codex_weekly_delta() {
   fi
 }
 
-codex_delta_color() {
+usage_delta_color() {
   local delta=$1
   if [[ $delta == +* ]]; then
     printf '%s' "$C_ALERT"
@@ -269,67 +268,122 @@ codex_delta_color() {
   fi
 }
 
-codex_usage_block() {
-  local name=$1 seconds=$2 pct=$3 reset_at=$4 now=$5
-  local label usage_color delta delta_color
-  label=$(codex_window_label "$seconds")
-  usage_color=$(codex_pct_color "$pct")
-
-  if delta=$(codex_weekly_delta "$pct" "$seconds" "$reset_at" "$now"); then
-    delta_color=$(codex_delta_color "$delta")
-    printf '%s,%s' \
-      "$(block "${name}${label} ${pct}%" "$usage_color")" \
-      "$(block "${delta}%" "$delta_color")"
-  else
-    block "${name}${label} ${pct}%" "$usage_color"
+# Prints "gap<TAB>color<TAB>text" per piece of one usage window.
+usage_window_pieces() {
+  local seconds=$1 pct=$2 reset_at=$3 now=$4
+  local delta arrow countdown
+  (( seconds == 604800 )) || printf '5\t%s\t%s\n' "$C_DIM" "$(usage_window_label "$seconds")"
+  printf '8\t%s\t%s%%\n' "$(usage_pct_color "$pct")" "$pct"
+  if delta=$(usage_weekly_delta "$pct" "$seconds" "$reset_at" "$now"); then
+    case $delta in
+      +*) arrow="▲${delta#+}" ;;
+      -*) arrow="▼${delta#-}" ;;
+      *)  arrow="±0" ;;
+    esac
+    printf '8\t%s\t%s%%\n' "$(usage_delta_color "$delta")" "$arrow"
   fi
+  countdown=$(format_countdown "$reset_at" "$now")
+  [[ -n $countdown ]] && printf '16\t%s\t%s\n' "$C_DIM" "$countdown"
+  return 0
 }
 
-block_codex() {
-  (( HAVE_JQ )) || return 0
-  local now mtime age
-  now=$(date +%s)
-  if [[ -f $CODEX_CACHE ]]; then
-    mtime=$(stat -f %m "$CODEX_CACHE" 2>/dev/null || echo 0)
+# Refresh a cache file in the background once it is older than its TTL.
+usage_cache_ready() {
+  local cache=$1 ttl=$2 refresh=$3 now=$4 mtime age
+  if [[ -f $cache ]]; then
+    mtime=$(stat -f %m "$cache" 2>/dev/null || echo 0)
     age=$(( now - mtime ))
   else
     age=999999
   fi
-  if (( age > CODEX_CACHE_TTL )); then
-    ( codex_refresh ) &
+  if (( age > ttl )); then
+    ( "$refresh" ) &
     disown 2>/dev/null || true
   fi
-  [[ -f $CODEX_CACHE ]] || return 0
+  [[ -f $cache ]]
+}
 
-  local data
-  data=$(<"$CODEX_CACHE")
-  printf '%s' "$data" | jq -e '.rate_limit.primary_window' >/dev/null 2>&1 || return 0
+# Reads "seconds<TAB>pct<TAB>reset_at" lines on stdin.
+usage_blocks() {
+  local icon=$1 now=$2 seconds pct reset_at
+  local pieces=()
+  while IFS=$'\t' read -r seconds pct reset_at; do
+    [[ $seconds =~ ^[0-9]+$ && $pct =~ ^[0-9]+$ ]] || continue
+    while IFS= read -r piece; do
+      pieces+=("$piece")
+    done < <(usage_window_pieces "$seconds" "$pct" "$reset_at" "$now")
+  done
+  (( ${#pieces[@]} )) || return 0
 
-  local parts=()
-  local name seconds pct reset_at reset style
-  while IFS=$'\t' read -r name seconds pct reset_at; do
-    [[ -n $name && $seconds =~ ^[0-9]+$ && $pct =~ ^[0-9]+$ ]] || continue
-    parts+=("$(codex_usage_block "$name" "$seconds" "$pct" "$reset_at" "$now")")
-    style=datetime
-    (( seconds <= 86400 )) && style="time"
-    reset=$(format_reset_time "$reset_at" "$style")
-    [[ -n $reset ]] && parts+=("$(block "@${reset}" "$C_DIM")")
-  done < <(printf '%s' "$data" | jq -r '
-    def windows($name; $limit):
-      [$limit.primary_window, $limit.secondary_window][]
-      | select(. != null)
-      | [$name, (.limit_window_seconds // 0), (.used_percent // 0 | round), (.reset_at // 0)]
-      | @tsv;
-    windows("✨"; .rate_limit)
-  ')
-
-  local joined="" first=1 p
-  for p in "${parts[@]}"; do
-    if (( first )); then joined="$p"; first=0
-    else joined="$joined,$p"
+  attached_block "$icon" "$C_FG" 2
+  local i gap color text last=$(( ${#pieces[@]} - 1 ))
+  for (( i = 0; i <= last; i++ )); do
+    IFS=$'\t' read -r gap color text <<<"${pieces[i]}"
+    printf ','
+    if (( i < last )); then
+      attached_block "$text" "$color" "$gap"
+    else
+      block "$text" "$color"
     fi
   done
-  printf '%s' "$joined"
+}
+
+block_codex() {
+  (( HAVE_JQ )) || return 0
+  local now
+  now=$(date +%s)
+  usage_cache_ready "$CODEX_CACHE" "$CODEX_CACHE_TTL" codex_refresh "$now" || return 0
+  jq -r '
+    [.rate_limit.primary_window, .rate_limit.secondary_window][]
+    | select(. != null)
+    | [(.limit_window_seconds // 0), (.used_percent // 0 | round), (.reset_at // 0)]
+    | @tsv
+  ' "$CODEX_CACHE" 2>/dev/null | usage_blocks "✨" "$now"
+}
+
+CLAUDE_CACHE="/tmp/claude/i3wm-osx-usage-cache.json"
+CLAUDE_CACHE_TTL=180
+CLAUDE_USAGE_URL="${CLAUDE_USAGE_URL:-https://api.anthropic.com/api/oauth/usage}"
+
+claude_oauth_token() {
+  if [[ -n ${CLAUDE_CODE_OAUTH_TOKEN:-} ]]; then
+    printf '%s' "$CLAUDE_CODE_OAUTH_TOKEN"
+    return 0
+  fi
+  command -v security >/dev/null 2>&1 || return 0
+  (( HAVE_JQ )) || return 0
+  security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null \
+    | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null
+}
+
+claude_refresh() {
+  local token response tmp
+  token=$(claude_oauth_token)
+  [[ -z $token ]] && return 0
+  response=$(curl -fsS --max-time 8 \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer $token" \
+    -H "anthropic-beta: oauth-2025-04-20" \
+    -H "User-Agent: i3wm-osx-statusline/1.0" \
+    "$CLAUDE_USAGE_URL" 2>/dev/null)
+  [[ -z $response ]] && return 0
+  printf '%s' "$response" | jq -e 'has("seven_day")' >/dev/null 2>&1 || return 0
+  mkdir -p "${CLAUDE_CACHE%/*}"
+  tmp="$CLAUDE_CACHE.tmp.$$"
+  printf '%s' "$response" >"$tmp" && mv "$tmp" "$CLAUDE_CACHE"
+}
+
+block_claude() {
+  (( HAVE_JQ )) || return 0
+  local now
+  now=$(date +%s)
+  usage_cache_ready "$CLAUDE_CACHE" "$CLAUDE_CACHE_TTL" claude_refresh "$now" || return 0
+  jq -r '
+    [[18000, .five_hour], [604800, .seven_day]][]
+    | select(.[1] != null)
+    | [.[0], (.[1].utilization // 0 | round), (.[1].resets_at // "")]
+    | @tsv
+  ' "$CLAUDE_CACHE" 2>/dev/null | usage_blocks "🤖" "$now"
 }
 
 GH_CACHE="/tmp/i3wm-osx-gh-notif.$UID"
@@ -366,6 +420,7 @@ emit() {
   local parts=()
   local b
   b=$(block_gh);       [[ -n $b ]] && parts+=("$b")
+  b=$(block_claude);   [[ -n $b ]] && parts+=("$b")
   b=$(block_codex);    [[ -n $b ]] && parts+=("$b")
   b=$(block_volume);   [[ -n $b ]] && parts+=("$b")
   b=$(block_mem);      [[ -n $b ]] && parts+=("$b")

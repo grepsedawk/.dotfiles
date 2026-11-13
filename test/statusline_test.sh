@@ -9,7 +9,7 @@ source "$STATUSLINE"
 assert_delta() {
   local expected=$1 used=$2 now=$3
   local reset=1700604800 actual
-  actual=$(codex_weekly_delta "$used" 604800 "$reset" "$now")
+  actual=$(usage_weekly_delta "$used" 604800 "$reset" "$now")
   [[ $actual == "$expected" ]] || {
     printf 'expected %s, got %s\n' "$expected" "$actual" >&2
     return 1
@@ -17,7 +17,7 @@ assert_delta() {
 }
 
 assert_no_delta() {
-  if codex_weekly_delta "$@" >/dev/null; then
+  if usage_weekly_delta "$@" >/dev/null; then
     printf 'expected no delta for: %s\n' "$*" >&2
     return 1
   fi
@@ -37,13 +37,25 @@ assert_no_delta 10 604800 1700604800 "$(( window_start - 1 ))"
 assert_no_delta 10 604800 1700604800 1700604800
 assert_no_delta 10 18000 1700604800 "$window_start"
 
-[[ $(codex_delta_color "+1") == "$C_ALERT" ]]
-[[ $(codex_delta_color "-1") == "$C_OK" ]]
-[[ $(codex_delta_color "0") == "$C_FG" ]]
+[[ $(usage_delta_color "+1") == "$C_ALERT" ]]
+[[ $(usage_delta_color "-1") == "$C_OK" ]]
+[[ $(usage_delta_color "0") == "$C_FG" ]]
 
-rendered=$(codex_usage_block "✨" 604800 13 1700604800 "$window_start")
-[[ $(printf '[%s]\n' "$rendered" | jq 'length') == 2 ]]
-[[ $(printf '[%s]\n' "$rendered" | jq -r '.[0].full_text') == "✨7d 13%" ]]
-[[ $(printf '[%s]\n' "$rendered" | jq -r '.[0].color') == "$C_OK" ]]
-[[ $(printf '[%s]\n' "$rendered" | jq -r '.[1].full_text') == "-1%" ]]
+rendered=$(printf '604800\t13\t1700604800\n' | usage_blocks "✨" "$window_start")
+[[ $(printf '[%s]\n' "$rendered" | jq -r '[.[].full_text] | join("|")') == "✨|13%|▼1%|07:00:00" ]]
 [[ $(printf '[%s]\n' "$rendered" | jq -r '.[1].color') == "$C_OK" ]]
+[[ $(printf '[%s]\n' "$rendered" | jq -r '.[2].color') == "$C_OK" ]]
+[[ $(printf '[%s]\n' "$rendered" | jq -c '[.[].separator]') == '[false,false,false,null]' ]]
+
+rendered=$(printf '604800\t30\t1700604800\n' | usage_blocks "✨" "$window_start")
+[[ $(printf '[%s]\n' "$rendered" | jq -r '.[2] | .full_text + " " + .color') == "▲16% $C_ALERT" ]]
+
+[[ -z $(printf '' | usage_blocks "✨" "$window_start") ]]
+
+[[ $(format_countdown 1700604800 "$(( 1700604800 - 2 * 86400 - 3 * 3600 - 4 * 60 - 59 ))") == "02:03:04" ]]
+[[ $(format_countdown 1700604800 1700604900) == "00:00:00" ]]
+[[ $(format_countdown "2023-11-21T22:13:20.845087+00:00" 1700604800) == "00:00:00" ]]
+[[ $(format_countdown "2023-11-21T22:13:20+00:00" 1700518400) == "01:00:00" ]]
+
+rendered=$(printf '18000\t42\t1700010000\n' | usage_blocks "🤖" 1700000000)
+[[ $(printf '[%s]\n' "$rendered" | jq -r '[.[].full_text] | join("|")') == "🤖|5h|42%|00:02:46" ]]
