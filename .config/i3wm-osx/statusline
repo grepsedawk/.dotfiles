@@ -241,12 +241,13 @@ usage_weekly_delta() {
   local pct=$1 seconds=$2 reset_at=$3 now=${4:-$(date +%s)}
   [[ $pct =~ ^[0-9]+$ && $seconds == 604800 && $now =~ ^[0-9]+$ ]] || return 1
 
-  local reset_epoch start_epoch target delta
+  local reset_epoch start_epoch day target delta
   reset_epoch=$(iso_to_epoch "$reset_at") || return 1
   start_epoch=$(( reset_epoch - seconds ))
   (( now >= start_epoch && now < reset_epoch )) || return 1
 
-  target=$(( (200 * (now - start_epoch) / seconds + 1) / 2 ))
+  day=$(( (now - start_epoch) / 86400 + 1 ))
+  target=$(( (100 * day + 3) / 7 ))
   delta=$(( pct - target ))
 
   if (( delta > 0 )); then
