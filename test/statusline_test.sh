@@ -25,12 +25,13 @@ assert_no_delta() {
 
 window_start=1700000000
 
-assert_delta "-4" 10 "$window_start"
-assert_delta "+6" 20 "$window_start"
-assert_delta "-29" 14 "$(( window_start + 2 * 86400 ))"
-assert_delta "0" 29 "$(( window_start + 86400 ))"
+assert_delta "+10" 10 "$window_start"
+assert_delta "+20" 20 "$window_start"
+assert_delta "-15" 14 "$(( window_start + 2 * 86400 ))"
+assert_delta "0" 14 "$(( window_start + 86400 ))"
 assert_delta "-15" 14 "$(( window_start + 2 * 86400 - 1 ))"
-assert_delta "-15" 85 "$(( window_start + 6 * 86400 ))"
+assert_delta "-1" 85 "$(( window_start + 6 * 86400 ))"
+assert_delta "+1" 51 "$(( window_start + 302400 ))"
 
 assert_no_delta 10 604800 invalid "$window_start"
 assert_no_delta 10 604800 1700604800 "$(( window_start - 1 ))"
@@ -41,14 +42,14 @@ assert_no_delta 10 18000 1700604800 "$window_start"
 [[ $(usage_delta_color "-1") == "$C_OK" ]]
 [[ $(usage_delta_color "0") == "$C_FG" ]]
 
-rendered=$(printf '604800\t13\t1700604800\n' | usage_blocks "✨" "$window_start")
-[[ $(printf '[%s]\n' "$rendered" | jq -r '[.[].full_text] | join("|")') == "✨|13%|▼1%|07:00:00" ]]
+rendered=$(printf '604800\t13\t1700604800\n' | usage_blocks "✨" "$(( window_start + 86400 ))")
+[[ $(printf '[%s]\n' "$rendered" | jq -r '[.[].full_text] | join("|")') == "✨|13%|▼1%|06:00:00" ]]
 [[ $(printf '[%s]\n' "$rendered" | jq -r '.[1].color') == "$C_OK" ]]
 [[ $(printf '[%s]\n' "$rendered" | jq -r '.[2].color') == "$C_OK" ]]
 [[ $(printf '[%s]\n' "$rendered" | jq -c '[.[].separator]') == '[false,false,false,null]' ]]
 
 rendered=$(printf '604800\t30\t1700604800\n' | usage_blocks "✨" "$window_start")
-[[ $(printf '[%s]\n' "$rendered" | jq -r '.[2] | .full_text + " " + .color') == "▲16% $C_ALERT" ]]
+[[ $(printf '[%s]\n' "$rendered" | jq -r '.[2] | .full_text + " " + .color') == "▲30% $C_ALERT" ]]
 
 [[ -z $(printf '' | usage_blocks "✨" "$window_start") ]]
 
